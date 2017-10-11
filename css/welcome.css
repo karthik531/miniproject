@@ -1,0 +1,78 @@
+header{
+	height: 20px;
+	background-color: #222222;
+}
+#ued,#und{
+	text-align: center;
+    font-family: monospace;
+    font-size: 20;
+    color: black;
+    background-color: gold;
+    margin: 0px;
+    padding: 10px;
+}
+#dashboard
+{	
+	width: 25%;
+	height: 650px;
+	background-color: #41495C;
+	float:left;
+}
+#displayPane
+{
+	/*width:940px;*/
+	height:650px;
+	border:1px solid #E9ECF1;
+	background-color: #E9ECF1;
+	/*float:left;*/
+}
+/*ul li
+{
+	margin-top:20px;
+	list-style:none;
+}
+button
+{
+	margin-left: -30px;
+	width: 200px;
+	text-align: left;
+	color:#9CD2F5;
+	font-size:18px;
+	border: none;
+	/* border: 1px solid black; 
+	background-color:#41495C;  
+	cursor:pointer;
+}
+button:hover{
+	color: #FFFFFF;
+	background-color:#9CD2F5;
+}*/
+.btn-group .button {
+    background-color: #41495C; /* Green */
+    border: 1px solid #41495C;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    height: 10%;
+    display: block;
+}
+
+.btn-group .button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+
+.btn-group .button:hover {
+    background-color: mediumaquamarine;
+}
+
+p{
+    text-align: center;
+    font-family: monospace;
+    font-size: 20;
+    color: white;
+}

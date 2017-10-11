@@ -1,0 +1,49 @@
+<html>
+    <head><title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="css/loginStyle.css"></head>
+    <script src="js/register.js"></script>
+    <body>
+        <div class="form">
+            <table align="center" class="table">
+                <!--tr>
+                    <td>User-ID: </td>
+                    <td><input type="text" id="ID"></td>
+                </tr>
+                <tr></tr-->
+                <tr>
+                    <td>Name: </td>
+                    <td><input type="text" id="NAME" class="textfield"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>Email: </td>
+                    <td><input type="email" id="EMAIL" class="textfield"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>Password: </td>
+                    <td><input type="password" id="PASSWORD" class="textfield"></td>
+                    <td>
+                        <div class="tooltip"><img style="border-radius: 50%;" src="images/questionMark.jpg" width="42px" height="33px">
+                          <span class="tooltiptext">
+                            Enter password format here...  
+                          </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="left">
+                        <button id="SIGNUP" class="button button1">Register</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
+        <script src = "js/appconfig.js">
+          // Initialize Firebase
+        </script>
+    </body>
+</html>
