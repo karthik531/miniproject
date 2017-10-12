@@ -21,6 +21,9 @@ function handleSignOut()
 	} 
 	return "";
 } 
+function insertEditor(){
+    document.getElementById("editor").innerHTML='<object width="75%" height="600" type="text/html" data="editor.html" ></object>';
+}
 function initApp()
 {
     firebase.auth().onAuthStateChanged(function(user)
