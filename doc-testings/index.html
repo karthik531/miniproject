@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>snapshot-testing</title>
+        <style>
+            #result{
+                color: greenyellow;
+                font-size: 25px;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="add" onclick="insert()" >ADD</button>
+        <button id="display" onclick="display()">display</button>
+        <button id="delete" onclick="deleteCity()">delete</button>
+        <div id="result"></div>
+        <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
+        <script>
+            var config = {
+				apiKey: "AIzaSyBo-qUTarXva7DW5YvKsrkkySYXI8R7-iM",
+				authDomain: "vishnu-a7bac.firebaseapp.com",
+				databaseURL: "https://vishnu-a7bac.firebaseio.com",
+				projectId: "vishnu-a7bac",
+				storageBucket: "vishnu-a7bac.appspot.com",
+				messagingSenderId: "43664081987"
+		     };
+		    firebase.initializeApp(config);    
+        </script>
+        <script>
+            function insert(){
+                var citiesRef = firebase.firestore().collection("cities");
+
+                citiesRef.doc("SF").set({
+                    name: "San Francisco", state: "CA", country: "USA",
+                    capital: false, population: 860000 });
+                citiesRef.doc("LA").set({
+                    name: "Los Angeles", state: "CA", country: "USA",
+                    capital: false, population: 3900000 });
+                citiesRef.doc("DC").set({
+                    name: "Washington, D.C.", state: null, country: "USA",
+                    capital: true, population: 680000 });
+                citiesRef.doc("TOK").set({
+                    name: "Tokyo", state: "null", country: "Japan",
+                    capital: true, population: 9000000 });
+                citiesRef.doc("BJ").set({
+                    name: "Beijing", state: null, country: "China",
+                    capital: true, population: 21500000 });
+               
+            }
+            function deleteCity(){
+                firebase.firestore().collection("cities").doc("SF").delete().then(function() {
+                console.log("Document successfully deleted!");
+                }).catch(function(error) {
+                console.error("Error removing document: ", error);
+                });
+            }
+            function display(){
+                firebase.firestore().collection("cities").where("state", "==", "CA")
+                .onSnapshot(function(querySnapshot) {
+                    var htmlString = "";
+                    querySnapshot.forEach(function(doc) {
+                        //cities.push(doc.data().name);
+                        htmlString+=doc.data().name+"<br>";
+                    });
+                    document.getElementById("result").innerHTML = htmlString;
+                    console.log("Current cities in CA: ", htmlString);
+                });
+            }
+        </script>
+    </body>
+</html>
