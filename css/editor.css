@@ -1,0 +1,12 @@
+header{
+	color: red;
+	font-size: 25px;
+}
+#title,#company-name{
+	color: red;
+	font-size: 18px;
+}
+#titleID,#companyID{
+	height: 25px;
+	width: 300px;
+}
