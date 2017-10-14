@@ -5,15 +5,25 @@
     </head>
     <body>
 		<header align="center">Authoring New Interview Experience</header>
-		<p id="title">TITLE</p>
-		<input type="text" name="title" id="titleID" placeholder="enter your role" class="textfield">
-		<p id="company-name">COMPANY</p>
-		<input type="text" name="title" id="companyID" placeholder="enter your company" class="textfield">
-        <form id="get-data-form" method="post">
-            <textarea class="tinymce" id="texteditor"></textarea>
-            <br>
-            <input type="submit" value="Submit Experience >>" class="button button1">
-        </form>
+        
+        <table>
+            <tr>
+                <td><p id="title">TITLE</p></td>
+                <td><input type="text" name="title" id="titleID" placeholder="enter your role" class="textfield"></td>
+            </tr>
+            <tr>
+                <td><p id="company-name">COMPANY</p></td>
+                <td><input type="text" name="title" id="companyID" placeholder="enter your company" class="textfield"></td>
+            </tr>
+        </table>
+        <table>
+            <form id="get-data-form" method="post">
+                <textarea class="tinymce" id="texteditor"></textarea>
+                <br>
+                <input type="submit" value="Submit Experience >>" class="button button1">
+            </form>
+        </table>
+        
         
         <div id="data-container"></div>
         

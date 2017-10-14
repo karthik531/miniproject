@@ -21,7 +21,7 @@ header{
 #displayPane
 {
 	/*width:940px;*/
-	height:650px;
+	height:auto;
 	border:1px solid #E9ECF1;
 	background-color: #E9ECF1;
 	/*float:left;*/
