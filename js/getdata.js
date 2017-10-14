@@ -1,25 +1,24 @@
-$(document).ready(function(){
-    $("#get-data-form").submit(function(e){
-        var content = tinymce.get("texteditor").getContent();
-        var titleID = document.getElementById("titleID").value.toUpperCase;
-        var companyID = document.getElementById("companyID").value.toUpperCase;
-        
-        var cookies = document.cookie;
-        cookarg = cookies.split(';');
-        mail = cookarg[0].split('=')[1];
-		alert(mail);
-        name = cookarg[1].split('=')[1];
-        alert(name);
-        var d = new Date();
-        var ts = d.getTime();
-        document.getElementById("data-container").innerHTML = content;
-        /*var experience = {
-            timestamp: ts,
-            username: name,
-            email: emailID
-            title: titleID,
-         */
-        //document.getElementById("data-container").innerHTML = experience;
-        return false;
-    });
-});
+function insertPost(){
+	var user_mail = sessionStorage.getItem("usermail");
+	var user_name = sessionStorage.getItem(user_mail);
+	var title_name = document.getElementById("titleID").value.toUpperCase();
+    var company_name= document.getElementById("companyID").value.toUpperCase();
+	var content =  tinymce.get("texteditor").getContent()
+	var d = new Date();
+	var time_stamp = d.getTime();
+	var experience = {
+		timestamp: time_stamp,
+		usermail: user_mail,
+		username: user_name,
+		company: company_name,
+		title: title_name,
+		description: content
+	};
+	var postRef = firebase.firestore().collection("posts").doc();
+	
+	postRef.set(experience).then(function(){
+		console.log("Document successfully written!");
+	}).catch(function(error) {
+    console.error("Error writing document: ", error);
+	});
+}
