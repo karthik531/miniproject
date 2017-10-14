@@ -5,23 +5,22 @@
 		<script src="js/welcome.js"></script>
 	</head>
 	<body>
-		<header>
-			
-		</header>
-		<div id="dashboard" class="btn-group">
-			<p id="und"></p><p id="ued"></p>
-            <button class="button" id="1" >Interview Experience</button>
-			<button class="button" id="2" onclick="insertEditor()">Add Experience</button>
-			<button class="button" id="3" >Your Posts</button>
-			<button class="button" id="4" >Tips</button>
-			<button class="button" id="5" >Q/A</button>
-			<button class="button" id="6" >Comapny Preparation</button>
-			<button class="button" id="7" >About</button>
-			<button id="logout" class="button" id="8">SignOut</button>
-		</div>
-		<div id="displayPane">
-			<div id="editor"></div>
-		</div>
+        <div id="master">
+            <div id="dashboard" class="btn-group">
+                <p id="und"></p><p id="ued"></p>
+                <button class="button" id="1" >Interview Experience</button>
+                <button class="button" id="2" onclick="insertEditor()">Add Experience</button>
+                <button class="button" id="3" >Your Posts</button>
+                <button class="button" id="4" >Tips</button>
+                <button class="button" id="5" >Q/A</button>
+                <button class="button" id="6" >Company Preparation</button>
+                <button class="button" id="7" >About</button>
+                <button id="logout" class="button" id="8">SignOut</button>
+            </div>
+            <div id="displayPane">
+                <!--div id="editor"></div-->
+            </div>
+        </div>
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
 		<script src = "js/appconfig.js"></script> 

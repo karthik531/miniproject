@@ -4,14 +4,36 @@
 		<link rel="stylesheet" type="text/css" href="css/editor.css">
     </head>
     <body>
-		<header align="center" >Authoring New Interview Experience</header>
-		<p id="title">TITLE</p>
-		<input type="text" name="title" id="titleID" placeholder="enter your role">
-		<p id="company-name">company</p>
-		<input type="text" name="title" id="companyID" placeholder="enter your company">
-        <textarea class="tinymce"></textarea>
+		<header align="center">Authoring New Interview Experience</header>
+        
+        <table>
+            <tr>
+                <td><p id="title">TITLE</p></td>
+                <td><input type="text" name="title" id="titleID" placeholder="enter your role" class="textfield"></td>
+            </tr>
+            <tr>
+                <td><p id="company-name">COMPANY</p></td>
+                <td><input type="text" name="title" id="companyID" placeholder="enter your company" class="textfield"></td>
+                <td>&nbsp;</td>
+                <td id="result-status">RESULT</td>
+                <td><input type="checkbox" id="hired" value="true">
+                    <span style="font-family: calibri, sans-serif;font-size: 20px">Hired</span>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <form id="get-data-form" method="post">
+                <textarea class="tinymce" id="texteditor"></textarea>
+                <input type="submit" value="Submit Experience >>" class="button button1">
+            </form>
+        </table>
+        
+        
+        <div id="data-container"></div>
+        
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="plugin/tinymce/tinymce.min.js"></script>
         <script type="text/javascript" src="plugin/tinymce/init-tinymce.js"></script>
+        <script type="text/javascript" src="js/getdata.js"></script>
     </body>
 </html>
