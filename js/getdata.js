@@ -7,8 +7,9 @@ $(document).ready(function(){
         var cookies = document.cookie;
         cookarg = cookies.split(';');
         mail = cookarg[0].split('=')[1];
+		alert(mail);
         name = cookarg[1].split('=')[1];
-              
+        alert(name);
         var d = new Date();
         var ts = d.getTime();
         document.getElementById("data-container").innerHTML = content;
