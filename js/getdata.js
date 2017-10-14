@@ -13,16 +13,17 @@ $(document).ready(function(){
             if(user)
                 {
                     mail = user.email;
+                    alert(mail);
                 }
             else 
                 {
                     console.log("no user exists");
                 }
-        }
+        });
               
         //var d = new Date();
         //var ts = d.getTime();
-        document.getElementById("data-container").innerHTML = mail;
+        //document.getElementById("data-container").innerHTML = mail;
         /*var experience = {
             timestamp: ts,
             username: name,
