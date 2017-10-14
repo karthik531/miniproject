@@ -4,12 +4,12 @@ $(document).ready(function(){
         var titleID = document.getElementById("titleID").value.toUpperCase;
         var companyID = document.getElementById("companyID").value.toUpperCase;
         
-        /*var cookies = document.cookie;
+        var cookies = document.cookie;
         cookarg = cookies.split(';');
         mail = cookarg[0].split('=')[1];
-        name = cookarg[1].split('=')[1];*/
+        name = cookarg[1].split('=')[1];
         
-        firebase.auth().onAuthStateChanged(function(user){
+        /* firebase.auth().onAuthStateChanged(function(user){
             if(user)
                 {
                     mail = user.email;
@@ -19,7 +19,7 @@ $(document).ready(function(){
                 {
                     console.log("no user exists");
                 }
-        });
+        }); */
               
         //var d = new Date();
         //var ts = d.getTime();
