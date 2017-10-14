@@ -8,7 +8,7 @@ header{
 }
 td
 {
-    margin-left: 10px
+    margin-left: 10px;
 }
 #title, #company-name, #result-status{
 	color: white;
