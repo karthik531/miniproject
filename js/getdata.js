@@ -1,6 +1,6 @@
 function insertPost(){
-	var user_mail = sessionStorage.getItem("usermail");
-	var user_name = sessionStorage.getItem(user_mail);
+	var user_mail = localStorage.getItem("usermail");
+	var user_name = localStorage.getItem(user_mail);
 	var title_name = document.getElementById("titleID").value.toUpperCase();
     var company_name= document.getElementById("companyID").value.toUpperCase();
 	var content =  tinymce.get("texteditor").getContent()

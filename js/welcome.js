@@ -33,10 +33,10 @@ function initApp()
 			
 			if(user.displayName==null)
 			{
-				var user_name = sessionStorage.getItem(user.email);
+				var user_name = localStorage.getItem(user.email);
 				if(user_name!=null)          
 				{
-						document.getElementById("und").innerHTML  = sessionStorage.getItem(user.email);//user_name;
+						document.getElementById("und").innerHTML  = localStorage.getItem(user.email);//user_name;
 				}
 				else         
 				{
@@ -46,8 +46,8 @@ function initApp()
 						if (doc.exists) 
 						{
 							var name1 = doc.data().username;
-							sessionStorage.setItem("usermail",user.email);
-							sessionStorage.setItem(user.email,name1);
+							localStorage.setItem("usermail",user.email);
+							localStorage.setItem(user.email,name1);
 							document.getElementById("und").innerHTML = name1; 
 						} 
 						else 
