@@ -6,16 +6,32 @@ window.onload = function()
 };
 function manageSignup()
 {
-    var email = document.getElementById("EMAIL").value;
-    var password = document.getElementById("PASSWORD").value;
-	name = document.getElementById("NAME").value;
+    var flag = 0;
+    var passexp = new RegExp("(?=^.{8,}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+    var email = document.getElementById("EMAIL").value.trim();
+    var password = document.getElementById("PASSWORD").value.trim();
+	name = document.getElementById("NAME").value.trim();
+    //validation of format
+    if(name == "" || !passexp.test(password))
+    {
+        flag = 1;
+        document.getElementById("ERROR").innerHTML = "Invalid Username or Password";
+    }
+    if(email == "")
+    {
+        flag = 1;
+        document.getElementById("ERROR").innerHTML = "Invalid email address";
+    }
 	/*---------------------------------*/
 	//document.cookie = "username="+name;
 	/*---------------------------------*/
-    var promise = firebase.auth().createUserWithEmailAndPassword(email,password); 
-	promise.catch(function(error){
-		console.error("ERROR CREATING USER");
-	});
+    if(flag == 0)   //valid format
+    {
+        var promise = firebase.auth().createUserWithEmailAndPassword(email,password); 
+        promise.catch(function(error){
+            console.error("ERROR CREATING USER");
+        });
+    }
 	
 }
 function initApp(){

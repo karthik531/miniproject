@@ -1,6 +1,5 @@
 .form{
-    margin: 10% 30%;
-    /*width: 38%;*/
+    margin: 8% 34%;
     max-width: 100%;
     height: auto;
     border: 2px solid #019934;
@@ -11,13 +10,14 @@
     font-size: 25px;
 }
 td{
-    height: 50px
+    height: 50px;
 }
 .textfield{
-    width: 300px;
-    height: 35px;
+    width: 350px;
+    height: 45px;
     padding: 5px;
-    font-size: 18px;
+    margin: 5px;
+    font-size: 20px;
     color: darkslategrey;
     font-family: Arial,sans-serif;
 }
@@ -95,10 +95,10 @@ a:hover, a:active {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 300px;
     background-color: black;
     color: #fff;
-    text-align: center;
+    text-align: justify;
     border-radius: 6px;
     padding: 5px 5px;
     position: absolute;
@@ -124,4 +124,12 @@ a:hover, a:active {
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+}
+#ERROR
+{
+    font-family: serif;
+    color: orangered;
+    font-size: 18px;
+    margin-left: 70px;
+    max-height: 10px;
 }

@@ -9,24 +9,22 @@
         <div class="form">
             <table align="center" class="table">
                 <tr>
-                    <td>Email: </td>
-                    <td><input type="text" id="EMAIL" class="textfield"></td>
+                    <td><input type="text" id="EMAIL" class="textfield" placeholder="someone@example.com" required></td>
                 </tr>
                 <tr></tr>
                 <tr>
-                    <td>Password: </td>
-                    <td><input type="password" id="PASSWORD" class="textfield"></td>
+                    <td><input type="password" id="PASSWORD" class="textfield" placeholder="enter password"></td>
                     <td>
                         <div class="tooltip"><img style="border-radius: 50%;" src="images/questionMark.jpg" width="42px" height="33px">
                           <span class="tooltiptext">
-                            Enter password format here...  
+                            Should contain at least one uppercase letter, one lowercase letter and a number. Minimum
+                               of 8 characters.  
                           </span>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td align="left"><button class="button button1" id="LOGIN">Login</button></td>
+                    <td align="center"><button class="button button1" id="LOGIN">Login</button></td>
                 </tr>
             </table>
             <hr>
@@ -35,6 +33,7 @@
                     <td align="left"><button class="gbutton gbutton1" id="GSIGNIN">Sign In with Google</button></td>
                     <td align="right"><a href="register.html">New User? Register Here</a></td>
                 </tr>
+                <tr><td colspan="2"><div id="ERROR"></div></td></tr>
             </table>
         </div>
         

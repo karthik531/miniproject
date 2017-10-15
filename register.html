@@ -5,38 +5,35 @@
     <body>
         <div class="form">
             <table align="center" class="table">
-                <!--tr>
-                    <td>User-ID: </td>
-                    <td><input type="text" id="ID"></td>
-                </tr>
-                <tr></tr-->
                 <tr>
-                    <td>Name: </td>
-                    <td><input type="text" id="NAME" class="textfield"></td>
+                    <td><input type="text" id="NAME" class="textfield" placeholder="enter username"></td>
                 </tr>
                 <tr></tr>
                 <tr>
-                    <td>Email: </td>
-                    <td><input type="email" id="EMAIL" class="textfield"></td>
+                    <td><input type="email" id="EMAIL" class="textfield" placeholder="someone@example.com" required></td>
                 </tr>
                 <tr></tr>
                 <tr>
-                    <td>Password: </td>
-                    <td><input type="password" id="PASSWORD" class="textfield"></td>
+                    <td><input type="password" id="PASSWORD" class="textfield" placeholder="enter password"></td>
                     <td>
                         <div class="tooltip"><img style="border-radius: 50%;" src="images/questionMark.jpg" width="42px" height="33px">
                           <span class="tooltiptext">
-                            Enter password format here...  
+                            Should contain at least one uppercase letter, one lowercase letter and a number. Minimum
+                               of 8 characters.
                           </span>
                         </div>
                     </td>
                 </tr>
+                <tr></tr>
                 <tr>
-                    <td></td>
-                    <td align="left">
+                    <td><input type="password" id="CPASSWORD" class="textfield" placeholder="re-enter password"></td>
+                </tr>
+                <tr>
+                    <td align="center">
                         <button id="SIGNUP" class="button button1">Register</button>
                     </td>
                 </tr>
+                <tr><td><div id="ERROR"></div></td></tr>
             </table>
         </div>
         

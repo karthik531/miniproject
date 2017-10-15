@@ -14,23 +14,39 @@ function manageGoogleSignin()
 }
 function manageLogin()
 {
-    var email = document.getElementById("EMAIL").value;
-    var password = document.getElementById("PASSWORD").value;
+    var flag = 0;
+    var passexp = new RegExp("(?=^.{8,}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+    var email = document.getElementById("EMAIL").value.trim();
+    var password = document.getElementById("PASSWORD").value.trim();
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error)
+    if(email == "")
     {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password')
+        flag = 1;
+        document.getElementById("ERROR").innerHTML = "Invalid email address";
+    }
+    if(!passexp.test(password))
+    {
+        flag = 1;
+        document.getElementById("ERROR").innerHTML = "Invalid Username or Password";
+    }
+    
+    if(flag == 0)
+    {
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error)
         {
-            alert('Wrong password.');
-        }
-        else
-        {
-            alert(errorMessage);
-        }
-        console.log(error);
-    });
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password')
+            {
+                alert('Wrong password.');
+            }
+            else
+            {
+                alert(errorMessage);
+            }
+            console.log(error);
+        });
+    }
 }
 function initApp()
 {
