@@ -2,6 +2,7 @@ function insertPost(){
     var flag = 0;
 	var title_name = document.getElementById("titleID").value.trim().toUpperCase();
     var company_name= document.getElementById("companyID").value.trim().toUpperCase();
+    var isHired = document.getElementById("hired").checked; //contains "true" if checked...else contains "false"
     var html_content =  tinymce.get("texteditor").getContent();
     var text_content =  tinymce.get("texteditor").getContent({format: 'text'}).trim(); //to verify if field is empty
     if(title_name == "")
@@ -34,6 +35,7 @@ function insertPost(){
             usermail: user_mail,
             username: user_name,
             company: company_name,
+            isHired: isHired,
             title: title_name,
             description: html_content
         };
@@ -42,8 +44,9 @@ function insertPost(){
         postRef.set(experience).then(function(){
             console.log("Document successfully written!");
             alert("Experience successfully saved!");
-            var titleID = document.getElementById("titleID").value = "";
-            var companyID = document.getElementById("companyID").value = "";
+            document.getElementById("titleID").value = "";
+            document.getElementById("companyID").value = "";
+            document.getElementById("hired").checked = false;
             tinymce.get('texteditor').setContent("");
         }).catch(function(error) {
             console.error("Error writing document: ", error);
