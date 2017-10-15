@@ -1,4 +1,3 @@
-
 var config = {
 	apiKey: "AIzaSyBo-qUTarXva7DW5YvKsrkkySYXI8R7-iM",
 	authDomain: "vishnu-a7bac.firebaseapp.com",
