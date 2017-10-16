@@ -7,6 +7,14 @@ window.onload = function()
 function manageSignup()
 {
     var flag = 0;
+//var orig_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
+//var our_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"); 
+	
+/* 
+	           **** DESCRIPTION ABOUT OUR_PAT REGEX ******* 
+6 to 20 characters string with at least one digit, one upper case letter, one lower case letter and optional special symbol
+
+*/
     var passexp = new RegExp("(?=^.{8,}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
     var email = document.getElementById("EMAIL").value.trim();
     var password = document.getElementById("PASSWORD").value.trim();
