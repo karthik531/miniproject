@@ -15,7 +15,7 @@ function manageGoogleSignin()
 function manageLogin()
 {
     var flag = 0;
-    var passexp = new RegExp("(?=^.{8,}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+    var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();
     var password = document.getElementById("PASSWORD").value.trim();
 
@@ -27,18 +27,19 @@ function manageLogin()
     if(!passexp.test(password))
     {
         flag = 1;
-        document.getElementById("ERROR").innerHTML = "Invalid Username or Password";
+        document.getElementById("ERROR").innerHTML = "Invalid Password";
     }
     
     if(flag == 0)
     {
+        document.getElementById("ERROR").innerHTML = "";
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error)
         {
             var errorCode = error.code;
             var errorMessage = error.message;
             if (errorCode === 'auth/wrong-password')
             {
-                alert('Wrong password.');
+                document.getElementById("ERROR").innerHTML = "Invalid Password";
             }
             else
             {

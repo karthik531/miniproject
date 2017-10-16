@@ -13,10 +13,10 @@ function manageSignup()
 	
 /* 
 	           **** DESCRIPTION ABOUT OUR_PAT REGEX ******* 
-6 to 20 characters string with at least one digit, one upper case letter, one lower case letter and optional special symbol
+6 to 15 characters string with at least one digit, one upper case letter, one lower case letter and optional special symbol
 
 */
-    var passexp = new RegExp("(?=^.{8,}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+    var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();
     var password = document.getElementById("PASSWORD").value.trim();
 	name = document.getElementById("NAME").value.trim();
@@ -36,6 +36,7 @@ function manageSignup()
 	/*---------------------------------*/
     if(flag == 0)   //valid format
     {
+        document.getElementById("ERROR").innerHTML = "";
         var promise = firebase.auth().createUserWithEmailAndPassword(email,password); 
         promise.catch(function(error){
             console.error("ERROR CREATING USER");
