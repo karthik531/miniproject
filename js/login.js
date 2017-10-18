@@ -1,9 +1,3 @@
-window.onload = function()
-{
-    document.getElementById('LOGIN').addEventListener('click', manageLogin, false);
-    document.getElementById('GSIGNIN').addEventListener('click', manageGoogleSignin, false);
-    initApp();
-};
 function manageGoogleSignin()
 {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -11,6 +5,7 @@ function manageGoogleSignin()
 	{
 		console.log(error.message);
 	});
+	initLoginProcess();
 }
 function manageLogin()
 {
@@ -31,28 +26,44 @@ function manageLogin()
         }
         console.log(error);
     });
+	initLoginProcess();
 }
-function initApp()
+function initLoginProcess()
 {
-    firebase.auth().onAuthStateChanged(function(user)
+	firebase.auth().onAuthStateChanged(function(user)
     {
-        if(user )
+        if(user)
         {
 				if(user.displayName!=null)
 				{
-						var docData = {
-						useremail: user.email,
-						username: user.displayName,
-						userid: user.uid
-					};
-					firebase.firestore().collection("users").doc(user.email).set(docData).then(function() 
-					{
-						console.log("Document successfully written!");
-						window.location.href = "welcome.html";
-					});
+					user_ref = user;
+					insertGoogleCredentials();
 				}
 				else
 				window.location.href = "welcome.html";
         }
     });
+}
+function insertGoogleCredentials()
+{
+	var docData = {
+		useremail: user_ref.email,
+		username: user_ref.displayName,
+		userid: user_ref.uid
+	};
+	var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
+	db.get().then(function(query)
+	{
+		if(query.empty)
+		{
+			firebase.firestore().collection("users").doc().set(docData).then(function() 
+			{
+			window.location.href = "welcome.html";
+			});
+		}
+		else
+		{
+			window.location.href = "welcome.html";
+		}
+	});
 }
