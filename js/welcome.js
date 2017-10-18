@@ -1,12 +1,76 @@
 window.onload = function()
 {
-    document.getElementById('logout').addEventListener('click', handleSignOut, false);
     initApp();
 };
+
 function handleSignOut()
 {
     firebase.auth().signOut();
 }
+
+function insertEditor()
+{
+	document.getElementById("displayPane").innerHTML='<object width="75%" height="100%" type="text/html" data="editor.html" ></object>';
+}
+
+function getAllPosts()
+{
+	var htmlString = "";
+	firebase.firestore().collection("posts").get().then(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			console.log(doc.id, " => ", doc.data());
+		});
+	});
+}
+function getName()
+{
+	if(user_ref.displayName==null)
+	{
+		var user_name = localStorage.getItem(user_ref.email);
+		if(user_name!=null)          
+		{ 
+			document.getElementById("und").innerHTML  = localStorage.getItem(user_ref.email);
+		}
+		else         
+		{
+			var query = firebase.firestore().collection("users").where("useremail", "==", user_ref.email);
+			query.get().then(function(querySnapshot) 
+			{
+				if(!querySnapshot.empty)
+				{
+					var docRef = querySnapshot.docs[0];
+					var user_name = docRef.data().username;
+					localStorage.setItem(user_ref.email,user_name);
+					document.getElementById("und").innerHTML = user_name;
+				}
+			});						
+		}	 
+	}
+	else
+	{
+		localStorage.setItem(user_ref.email,user_ref.displayName);
+		document.getElementById("und").innerHTML =user_ref.displayName;
+	}
+	document.getElementById("ued").innerHTML = user_ref.email;
+}
+function initApp()
+{
+    firebase.auth().onAuthStateChanged(function(user)
+    {
+        if(user)
+        {
+			user_ref = user;  
+			getName();
+		}
+        else
+        {
+            window.location.href = "index.html";
+        }
+    });
+}
+
+
+
  /* function getName(mail){
 	 var cookies = document.cookie;
 	 cookarg = cookies.split(';');
@@ -21,55 +85,3 @@ function handleSignOut()
 	} 
 	return "";
 }  */
-function insertEditor(){
-    document.getElementById("displayPane").innerHTML='<object width="75%" height="100%" type="text/html" data="editor.html" ></object>';
-}
-function initApp()
-{
-    firebase.auth().onAuthStateChanged(function(user)
-    {
-        if(user)
-        {
-			
-			if(user.displayName==null)
-			{
-				var user_name = sessionStorage.getItem(user.email);
-				if(user_name!=null)          
-				{
-						document.getElementById("und").innerHTML  = sessionStorage.getItem(user.email);//user_name;
-				}
-				else         
-				{
-					var db = firebase.firestore();
-					var docRef = db.collection("users").doc(user.email);
-					docRef.get().then(function(doc){
-						if (doc.exists) 
-						{
-							var name1 = doc.data().username;
-							sessionStorage.setItem("usermail",user.email);
-							sessionStorage.setItem(user.email,name1);
-							document.getElementById("und").innerHTML = name1; 
-						} 
-						else 
-						{
-							console.log("No such document!");
-						}
-					}).catch(function(error) {
-							console.log("Error getting document:", error);
-					});
-				} 
-			}
-			else
-			{
-				
-				document.getElementById("und").innerHTML =user.displayName;
-			}
-			document.getElementById("ued").innerHTML = user.email;
-		}
-        else
-        {
-            window.location.href = "index.html";
-        }
-    });
-}
-

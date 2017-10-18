@@ -1,11 +1,6 @@
-var name = "";
-window.onload = function() 
-{
-  document.getElementById('SIGNUP').addEventListener('click', manageSignup, false);
-  initApp();
-};
 function manageSignup()
 {
+<<<<<<< HEAD
     var flag = 0;
 //REF_URL = https://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
 //var orig_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
@@ -41,22 +36,32 @@ function manageSignup()
         promise.catch(function(error){
             console.error("ERROR CREATING USER");
         });
+        firebase.auth().onAuthStateChanged(function(user)
+	    {
+            if(user)
+            {
+                user_ref = user;
+                insertInfoAndProceed();
+            }
+        });
     }
-	
 }
-function initApp(){
-   firebase.auth().onAuthStateChanged(function(user){
-		if(user)
-		{
+function insertInfoAndProceed()
+{
 			var docData = {
-				useremail: user.email,
+				useremail: user_ref.email,
 				username: name,
-				userid: user.uid
+				userid: user_ref.uid
 			};
-			firebase.firestore().collection("users").doc(user.email).set(docData).then(function() {
-			window.location.href = "welcome.html";
+			var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
+			db.get().then(function(query)
+			{
+				if(query.empty)
+				{
+					firebase.firestore().collection("users").doc().set(docData).then(function() 
+					{
+					window.location.href = "welcome.html";
+					});
+				}
 			});
-			
-		}
-   });
 }

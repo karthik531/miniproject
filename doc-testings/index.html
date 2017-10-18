@@ -54,18 +54,33 @@
                 console.error("Error removing document: ", error);
                 });
             }
-            function display(){
-                firebase.firestore().collection("cities").where("state", "==", "CA")
-                .onSnapshot(function(querySnapshot) {
-                    var htmlString = "";
-                    querySnapshot.forEach(function(doc) {
-                        //cities.push(doc.data().name);
-                        htmlString+=doc.data().name+"<br>";
-                    });
-                    document.getElementById("result").innerHTML = htmlString;
-                    console.log("Current cities in CA: ", htmlString);
-                });
-            }
+            function display()
+			{
+					var company_name =  window.prompt("ENTER");
+					var colRef = firebase.firestore().collection("company");
+
+
+					colRef.where("name", "==", company_name).get().then(function(querySnapshot) 
+					{
+						if(querySnapshot.empty)
+						{
+							DocRef = colRef.add({
+							name: company_name,
+							count: 1
+							});
+							
+						}
+						else
+						{
+							var DocRef = querySnapshot.docs[0];
+							var doc_id = DocRef.id;
+							var md_ct = DocRef.data().count+1;
+							colRef.doc(doc_id).update({
+								count: md_ct
+							});
+						}
+					});
+		}
         </script>
     </body>
 </html>
