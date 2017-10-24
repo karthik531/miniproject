@@ -1,6 +1,5 @@
 function manageSignup()
 {
-<<<<<<< HEAD
     var flag = 0;
 //REF_URL = https://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
 //var orig_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
