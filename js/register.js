@@ -1,5 +1,7 @@
 function manageSignup()
 {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("form").style.display = "none";
     var flag = 0;
 //REF_URL = https://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
 //var orig_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
@@ -13,15 +15,27 @@ function manageSignup()
     var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();
     var password = document.getElementById("PASSWORD").value.trim();
+    var cpassword = document.getElementById("CPASSWORD").value.trim();
 	name = document.getElementById("NAME").value.trim();
     //validation of format
     if(name == "" || !passexp.test(password))
     {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("form").style.display = "block";
         flag = 1;
         document.getElementById("ERROR").innerHTML = "Invalid Username or Password";
     }
+    if(password != cpassword)
+    {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("form").style.display = "block";
+        flag = 1;
+        document.getElementById("ERROR").innerHTML = "Password fields must be equal";
+    }
     if(email == "")
     {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("form").style.display = "block";
         flag = 1;
         document.getElementById("ERROR").innerHTML = "Invalid email address";
     }
@@ -33,6 +47,8 @@ function manageSignup()
         document.getElementById("ERROR").innerHTML = "";
         var promise = firebase.auth().createUserWithEmailAndPassword(email,password); 
         promise.catch(function(error){
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("form").style.display = "block";
             console.error("ERROR CREATING USER");
         });
         firebase.auth().onAuthStateChanged(function(user)
