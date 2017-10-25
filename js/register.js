@@ -1,11 +1,7 @@
 function manageSignup()
 {
-<<<<<<< HEAD
-
-=======
     document.getElementById("loader").style.display = "block";
     document.getElementById("form").style.display = "none";
->>>>>>> karthik-branch
     var flag = 0;
 //REF_URL = https://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
 //var orig_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
@@ -14,7 +10,6 @@ function manageSignup()
 /* 
 	           **** DESCRIPTION ABOUT OUR_PAT REGEX ******* 
 6 to 15 characters string with at least one digit, one upper case letter, one lower case letter and optional special symbol
-
 */
     var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();
