@@ -8,9 +8,16 @@ function handleSignOut()
     firebase.auth().signOut();
 }
 
+function displayEditor()
+{
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("editor").style.display = "block";
+}
+
 function insertEditor()
 {
-	document.getElementById("displayPane").innerHTML='<object width="75%" height="100%" type="text/html" data="editor.html" ></object>';
+    document.getElementById("loader").style.display = "block";
+	document.getElementById("editor").innerHTML='<object onload="displayEditor()" width="75%" height="100%" type="text/html" data="editor.html"></object>';
 }
 
 function getAllPosts()

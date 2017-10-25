@@ -1,14 +1,20 @@
 function manageGoogleSignin()
 {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("form").style.display = "none";
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).catch(function(error)
 	{
-		console.log(error.message);
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("form").style.display = "block";
+		alert(error.message);
 	});
 	initLoginProcess();
 }
 function manageLogin()
 {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("form").style.display = "none";
     var flag = 0;
     var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();
@@ -16,11 +22,15 @@ function manageLogin()
 
     if(email == "")
     {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("form").style.display = "block";
         flag = 1;
         document.getElementById("ERROR").innerHTML = "Invalid email address";
     }
     if(!passexp.test(password))
     {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("form").style.display = "block";
         flag = 1;
         document.getElementById("ERROR").innerHTML = "Invalid Password";
     }
@@ -30,6 +40,8 @@ function manageLogin()
         document.getElementById("ERROR").innerHTML = "";
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error)
         {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("form").style.display = "block";
             var errorCode = error.code;
             var errorMessage = error.message;
             if (errorCode === 'auth/wrong-password')
