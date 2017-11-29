@@ -16,19 +16,76 @@ function displayEditor()
 
 function insertEditor()
 {
-    document.getElementById("loader").style.display = "block";
-	document.getElementById("editor").innerHTML='<object onload="displayEditor()" width="75%" height="100%" type="text/html" data="editor.html"></object>';
+//document.getElementById("loader").style.display = "block";
+//document.getElementById("editor").innerHTML='<object onload="displayEditor()" width="75%" height="100%" type="text/html" data="editor.html"    //</object>';
+    
+    document.getElementById("cards").style.display = "none";
+    document.getElementById("cardcontent").style.display = "none";
+    document.getElementById("editor").style.display = "block";
+  
 }
 
-function getAllPosts()
+function getInterviewExperiences()
 {
-	var htmlString = "";
-	firebase.firestore().collection("posts").get().then(function(querySnapshot) {
-		querySnapshot.forEach(function(doc) {
-			console.log(doc.id, " => ", doc.data());
-		});
-	});
+	path = firebase.firestore().collection("posts");
+    var docIdString = "";
+    path.get().then(function(querySnapshot) 
+    {
+            querySnapshot.forEach(function(doc) 
+            { 
+
+                docIdString = docIdString+'<div id ="ind-card" onclick=getAllContent("'+doc.id+'")>'+
+                '<span id="company-name">'+doc.data().company+'</span>'+
+                '<span id="user-name">'+doc.data().username+'</span>'+
+                '</div>'
+            });
+        
+            document.getElementById("cards").style.display = "block";
+            document.getElementById("editor").style.display = "none";
+            document.getElementById("cardcontent").style.display = "none";
+            document.getElementById("cards").innerHTML = docIdString;
+    });
 }
+
+function gotoCards()
+{
+    document.getElementById("cards").style.display = "block";
+    document.getElementById("cardcontent").style.display = "none";
+    
+}
+
+function getAllContent(docId)
+{
+    
+    document.getElementById("cards").style.display = "none";
+    document.getElementById("cardcontent").style.display = "block";
+    document.getElementById("description").innerHTML = "";
+    document.getElementById("comments").innerHTML = "";
+    var descriptionPath = path.doc(docId);
+    var commentpath = path.doc(docId).collection("comments");
+
+    var commentString = "";
+
+    descriptionPath.get().then(function(doc)
+    {
+        if(doc && doc.exists)
+        {
+            document.getElementById("description").innerHTML = doc.data().description;
+        }
+    });
+
+    commentpath.get().then(function(querySnapshot)
+    {
+        querySnapshot.forEach(function(doc)
+        {        
+            commentString = commentString+'comment id'+doc.id+'<br>';
+        }); 
+        
+        document.getElementById("comments").innerHTML = commentString;
+        
+    });
+}
+
 function getName()
 {
 	if(user_ref.displayName==null)
