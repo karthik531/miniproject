@@ -27,6 +27,10 @@
             {
                 float:right;
             }
+            #cards,#cardcontent{
+                height : 100%;
+                overflow : scroll;
+            }
         </style>
         
 		<link rel="stylesheet" type="text/css" href="css/welcome.css">
@@ -35,6 +39,7 @@
 	</head>
 	<body>
         <div id="master">
+            
             <div id="dashboard" class="btn-group">
                 <p id="und"></p><p id="ued"></p>
                 <button class="button" id="1" onclick="getInterviewExperiences()">Interview Experience</button>
@@ -46,20 +51,28 @@
                 <button class="button" id="7" >About</button>
                 <button id="logout" class="button" id="8" onclick="handleSignOut()" >SignOut</button>
             </div>
+            
             <div id="displayPane">
                 <!--<div id="loader" style="display: none;"></div>
                 <div id="editor"></div>-->
-                <div id="cards" hidden>  </div>
-        
+                <div id="cards"  hidden>  </div>
+                
                  <div id="cardcontent" hidden >
-                    <div id="description"></div>
-                    <div id="comments"></div>
-                    <span id="close" onclick="gotoCards()">CLOSE</span>
+                     
+                        <span id="close" onclick="gotoCards()">CLOSE</span>
+                        <div id="description" ></div>
+                        <label>COMMENT::</label><input type="text" id="comment-box" placeholder="leave your comment here">
+                        <button id="comment-button" onclick="insertComment()">COMMENT</button>
+                        <div id="comments"></div>
+                     
                 </div>
                 
                 <iframe src = "editor.html" id = "editor" width = "75%" height="100%" style="border:none;" hidden ></iframe>
+                
             </div>
+            
         </div>
+        
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
 		<script src = "js/appconfig.js"></script> 

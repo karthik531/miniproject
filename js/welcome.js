@@ -56,16 +56,15 @@ function gotoCards()
 
 function getAllContent(docId)
 {
-    
     document.getElementById("cards").style.display = "none";
     document.getElementById("cardcontent").style.display = "block";
     document.getElementById("description").innerHTML = "";
     document.getElementById("comments").innerHTML = "";
+    
     var descriptionPath = path.doc(docId);
-    var commentpath = path.doc(docId).collection("comments");
-
-    var commentString = "";
-
+    
+    commentpath = path.doc(docId).collection("comments");
+    
     descriptionPath.get().then(function(doc)
     {
         if(doc && doc.exists)
@@ -74,23 +73,45 @@ function getAllContent(docId)
         }
     });
 
-    commentpath.get().then(function(querySnapshot)
+   getAllComments();
+}
+
+function getAllComments()
+{
+   
+    
+    commentpath.onSnapshot(function(querySnapshot) 
     {
-        querySnapshot.forEach(function(doc)
-        {        
-            commentString = commentString+'comment id'+doc.id+'<br>';
-        }); 
+        var commentString = "";
+        
+        querySnapshot.forEach(function(doc) 
+        {
+            username = doc.data().username;
+            comment = doc.data().comment;
+            commentString += "<p id='cusername'>"+ username +"</p>"
+            commentString+="<p id='comment'>"+ comment +"</p>"    
+        });
         
         document.getElementById("comments").innerHTML = commentString;
-        
     });
 }
 
+function insertComment()
+{
+    var com = document.getElementById("comment-box").value;
+    if(com==""){
+        alert("empty comment not accepted");
+    }
+    else{
+           var commentData = {username : user_name , comment : com};
+        var promise = commentpath.doc().set(commentData);
+    }
+}
 function getName()
 {
 	if(user_ref.displayName==null)
 	{
-		var user_name = localStorage.getItem(user_ref.email);
+		user_name = localStorage.getItem(user_ref.email);
 		if(user_name!=null)          
 		{ 
 			document.getElementById("und").innerHTML  = localStorage.getItem(user_ref.email);
