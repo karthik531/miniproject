@@ -14,7 +14,7 @@
 }
 #dashboard
 {	
-	width: 25%;
+	width: 20%;
 	height: 100%;
 	background-color: #41495C;
 	float:left;
@@ -85,14 +85,14 @@ p{
   left: 65%;
   top: 50%;
   z-index: 1;
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   margin: -75px 0 0 -75px;
-  border: 12px solid #f3f3f3;
+  border: 8px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 12px solid #3498db;
-  width: 80px;
-  height: 80px;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
