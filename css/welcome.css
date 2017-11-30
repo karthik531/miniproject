@@ -22,11 +22,18 @@
 }
 #displayPane
 {
-	/*width:940px;*/
-	height:100%;
-	/*border:1px solid #E9ECF1;*/
-	background-color: white;
+	width: 80%;
+	height: 100%;
+	float: left;
+    margin-left: 0px;
 }
+
+/*===============CARDS DISPLAY CSS====================*/
+#cards
+{
+    margin: 20px 10px;
+}
+
 /*ul li
 {
 	margin-top:20px;
@@ -82,8 +89,8 @@ button:hover{
 
 #loader {
   position: absolute;
-  left: 65%;
-  top: 50%;
+  left: 60%;
+  top: 55%;
   z-index: 1;
   width: 50px;
   height: 50px;

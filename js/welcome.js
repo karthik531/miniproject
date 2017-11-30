@@ -8,11 +8,11 @@ function handleSignOut()
     firebase.auth().signOut();
 }
 
-function displayEditor()
+/*function displayEditor()
 {
     document.getElementById("loader").style.display = "none";
     document.getElementById("editor").style.display = "block";
-}
+}*/
 
 function insertEditor()
 {
@@ -27,6 +27,8 @@ function insertEditor()
 
 function getInterviewExperiences()
 {
+    document.getElementById("editor").style.display = "none";
+    document.getElementById("loader").style.display = "block";
 	path = firebase.firestore().collection("posts");
     var docIdString = "";
     path.get().then(function(querySnapshot) 
@@ -37,11 +39,11 @@ function getInterviewExperiences()
                 docIdString = docIdString+'<div id ="ind-card" onclick=getAllContent("'+doc.id+'")>'+
                 '<span id="company-name">'+doc.data().company+'</span>'+
                 '<span id="user-name">'+doc.data().username+'</span>'+
-                '</div>'
+                '</div><br>'
             });
         
+            document.getElementById("loader").style.display = "none";
             document.getElementById("cards").style.display = "block";
-            document.getElementById("editor").style.display = "none";
             document.getElementById("cardcontent").style.display = "none";
             document.getElementById("cards").innerHTML = docIdString;
     });
