@@ -10,7 +10,6 @@ function manageSignup()
 /* 
 	           **** DESCRIPTION ABOUT OUR_PAT REGEX ******* 
 6 to 15 characters string with at least one digit, one upper case letter, one lower case letter and optional special symbol
-
 */
     var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();

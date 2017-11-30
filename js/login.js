@@ -96,3 +96,6 @@ function insertGoogleCredentials()
 		}
 	});
 }
+window.onload = function(){
+   initLoginProcess();
+};
