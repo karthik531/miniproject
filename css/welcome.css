@@ -3,7 +3,7 @@
     font-family: monospace;
     font-size: 20;
     color: black;
-    background-color: gold;
+    background-color: greenyellow;
     margin: 0px;
     padding: 10px;
 }
@@ -19,21 +19,80 @@
 	background-color: #41495C;
 	float:left;
     margin: 0px;
+    position: fixed;
 }
 #displayPane
 {
 	width: 80%;
 	height: 100%;
-	float: left;
+	float: right;
     margin-left: 0px;
+    background-color: white;
 }
 
 /*===============CARDS DISPLAY CSS====================*/
 #cards
 {
     margin: 20px 10px;
+    font-family: Calibri, sans-serif;
+    color: darkgreen;
+    font-style: oblique;
+    font-size: 18px;
 }
-
+#ind-card
+{
+    background-color: floralwhite;
+    width: 90%;
+    height: 15%;
+    margin-left: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#ind-card:hover
+{
+    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#company-name
+{
+    margin:10px;
+    float:left;
+}
+#user-name
+{
+    margin: 10px;
+    float: right;
+}
+#views
+{
+    margin:auto 20px;
+}
+#close
+{
+    margin: 10px;
+    float:right;
+}
+#cardcontent
+{
+    background-color: floralwhite;
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: green;
+    font-family: Calibri, sans-serif;
+    font-style: oblique;
+}
+#description
+{
+    margin: 10px;
+}
+#comments
+{
+    margin: 10px;
+}
+/*===================CARDS STYLING COMPLETE===================*/
 /*ul li
 {
 	margin-top:20px;
@@ -89,7 +148,7 @@ button:hover{
 
 #loader {
   position: absolute;
-  left: 60%;
+  left: 63%;
   top: 55%;
   z-index: 1;
   width: 50px;

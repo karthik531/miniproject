@@ -84,7 +84,6 @@ function getAllContent(docId)
         }); 
         
         document.getElementById("comments").innerHTML = commentString;
-        
     });
 }
 
