@@ -103,6 +103,7 @@ function insertComment()
         alert("empty comment not accepted");
     }
     else{
+           var user_name = document.getElementById("und").innerHTML;
            var commentData = {username : user_name , comment : com};
         var promise = commentpath.doc().set(commentData);
     }
