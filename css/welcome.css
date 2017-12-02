@@ -1,11 +1,23 @@
-#ued,#und{
+#name-and-photo{
 	text-align: center;
-    font-family: monospace;
-    font-size: 20;
-    color: black;
-    background-color: greenyellow;
-    margin: 0px;
+    font-family: sans-serif;
+    font-size: 25;
+    color: white;
+    background-color: darkcyan;
+    margin: 5px;
     padding: 10px;
+}
+#ued{
+	text-align: center;
+    font-family: sans-serif;
+    font-size: 18;
+    color: white;
+    background-color: darkcyan;
+    margin: 5px;
+}
+img
+{
+    border-radius: 30px;
 }
 #master
 {
@@ -27,7 +39,7 @@
 	height: 100%;
 	float: right;
     margin-left: 0px;
-    background-color: white;
+    background-color: #f7f7f7;
 }
 
 /*===============CARDS DISPLAY CSS====================*/
@@ -35,13 +47,13 @@
 {
     margin: 20px 10px;
     font-family: Calibri, sans-serif;
-    color: darkgreen;
-    font-style: oblique;
+    color: black;
+    font-style: normal;
     font-size: 18px;
 }
 #ind-card
 {
-    background-color: floralwhite;
+    background-color: white;
     width: 90%;
     height: 15%;
     margin-left: 5%;
@@ -125,7 +137,7 @@ button:hover{
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    height: 10%;
+    height: 9%;
     display: block;
 }
 
