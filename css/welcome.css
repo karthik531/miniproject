@@ -15,7 +15,7 @@
     background-color: darkcyan;
     margin: 5px;
 }
-img
+#profile-pic
 {
     border-radius: 30px;
 }
@@ -31,6 +31,8 @@ img
 	background-color: #41495C;
 	float:left;
     margin: 0px;
+    top: 0;
+    left: 0;
     position: fixed;
 }
 #displayPane
@@ -39,6 +41,7 @@ img
 	height: 100%;
 	float: right;
     margin-left: 0px;
+    top: 0;
     background-color: #f7f7f7;
 }
 
@@ -50,8 +53,6 @@ img
     color: black;
     font-style: normal;
     font-size: 18px;
-    height: 100%;
-    overflow: scroll;
 }
 #ind-card
 {
@@ -82,30 +83,17 @@ img
 {
     margin:auto 20px;
 }
-#close
-{
-    margin: 10px;
-    float:right;
-}
 #cardcontent
 {
-    background-color: floralwhite;
-    width: 90%;
-    height: 100%;
-    overflow: scroll;
-    margin-left: 5%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    color: green;
-    font-family: Calibri, sans-serif;
-    font-style: oblique;
-}
-#description
-{
-    margin: 10px;
-}
-#comments
-{
-    margin: 10px;
+    background-color: white;
+    width: 100%;
+    height: auto;
+    margin-left: 5px;
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+    color: black;
+    font-family: sans-serif;
+    font-style: normal;
+    font-size: 18;
 }
 /*===================CARDS STYLING COMPLETE===================*/
 /*ul li
@@ -129,6 +117,112 @@ button:hover{
 	color: #FFFFFF;
 	background-color:#9CD2F5;
 }*/
+
+/*===================DESCRIPTION AND COMMENTS STYLING======================*/
+#close
+{
+    margin: 0px;
+    position: fixed;
+    width: 100%;
+    background-color: #f7f7f7;
+    top: 0;
+}
+#close-image
+{
+    height: 40px;
+    width: 40px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+#main-content
+{
+    margin-top: 45px;
+    background-color: #f7f7f7;
+}
+#description
+{
+    margin: 15px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 3px black solid;
+    border-radius: 5px;
+}
+#comments
+{
+    margin: 5px;
+    margin-top: 15px;
+}
+#ind-comment
+{
+    background-color: lightblue;
+    width: auto;
+    color: white;
+    height: auto;
+    padding: 2px;
+    margin: 15px 5px;
+    border-radius: 5px;
+}
+#cusername  /*comment username*/
+{
+    background-color: darkcyan;
+    padding: 5px;
+    font-size: 18px;
+    margin: 0px 0px auto 0px;
+    font-family: sans-serif;
+}
+#comment
+{
+    color: black;
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 5px;
+}
+#comment-heading
+{
+    font-family: sans-serif;
+    font-size: 20px;
+    width: 100%;
+    height: 10%;
+    padding: 5px;
+    margin: 15px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: lightblue;
+}
+#comment-box
+{
+    font-family: sans-serif;
+    font-size: 18px;
+    margin: 15px;
+    margin-bottom: 0px;
+    width: 80%;
+    height: 10%;
+}
+.cmnt-button{
+    background-color: cadetblue; /* Green */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 8px 15px;
+    margin: 0px 0px 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    display: inline-block;
+    font-size: 18px;
+}
+.cmnt-button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid cadetblue;
+}
+
+.cmnt-button1:hover {
+    background-color: cadetblue;
+    color: white;
+}
+/*===================END OF DESCRIPTION AND COMMENTS STYLING======================*/
+
 .btn-group .button {
     background-color: #41495C; /* Green */
     border: 1px solid #41495C;

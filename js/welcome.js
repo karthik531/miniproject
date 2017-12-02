@@ -217,8 +217,8 @@ function getAllComments()
         {
             username = doc.data().username;
             comment = doc.data().comment;
-            commentString += "<p id='cusername'>"+ username +"</p>"
-            commentString+="<p id='comment'>"+ comment +"</p>"    
+            commentString += "<div id='ind-comment'><p id='cusername'>"+ username +"</p>"
+            commentString+="<p id='comment'>"+ comment +"</p></div>"    
         });
         document.getElementById("comments").innerHTML = commentString;
     });
@@ -272,7 +272,14 @@ function initApp()
     });
 }
 
-
+function changeCloseImage()
+{
+    document.getElementById("close-image").src = "backbutton-final.jpg";
+}
+function revertCloseImage()
+{
+    document.getElementById("close-image").src = "backbutton-init.png";
+}
 
  /* function getName(mail){
 	 var cookies = document.cookie;

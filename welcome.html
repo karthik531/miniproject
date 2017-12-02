@@ -10,7 +10,7 @@
             
             <div id="dashboard" class="btn-group">
                 <div id="name-and-photo">
-                    <div id="photo"><img src="Koala.jpg" height="50px" width="50px"></div>
+                    <div id="photo"><img id="profile-pic" src="Koala.jpg" height="50px" width="50px"></div>
                     <div id="und"></div>
                     <div id="ued"></div>
                 </div>
@@ -32,12 +32,17 @@
                 
                  <div id="cardcontent" style="display:none" >
                      
-                        <span id="close" onclick="gotoCards()">CLOSE</span>
-                        <div id="description" ></div>
-                        <label>COMMENT::</label><input type="text" id="comment-box" placeholder="leave your comment here">
-                        <button id="comment-button" onclick="insertComment()">COMMENT</button>
-                        <div id="comments"></div>
-                     
+                        <div id="close" onclick="gotoCards()">
+                            <img id="close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                        </div>
+                        <div id="main-content">
+                            <div id="description" ></div>
+                            <label ID="comment-heading">COMMENTS</label><br>
+                            <textarea placeholder="Leave your comment here" id="comment-box" rows="3" cols="50"></textarea>
+                            <br>
+                            <button class="cmnt-button cmnt-button1" onclick="insertComment()">Post</button>
+                            <div id="comments"></div>
+                        </div>
                 </div>
                 
                 <div id="questions" style="display:none">
@@ -53,7 +58,7 @@
                     <div id="answers"></div>
                 </div>
                 
-                <iframe src = "editor.html" id = "editor" width = "75%" height="100%" style="border:none;display:none" hidden ></iframe>
+                <iframe src = "editor.html" id = "editor" width = "100%" height="100%" style="border:none;display:none" hidden ></iframe>
             </div>
             
         </div>
