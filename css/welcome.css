@@ -50,6 +50,8 @@ img
     color: black;
     font-style: normal;
     font-size: 18px;
+    height: 100%;
+    overflow: scroll;
 }
 #ind-card
 {
@@ -89,7 +91,8 @@ img
 {
     background-color: floralwhite;
     width: 90%;
-    height: auto;
+    height: 100%;
+    overflow: scroll;
     margin-left: 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: green;

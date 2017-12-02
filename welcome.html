@@ -7,6 +7,7 @@
 	</head>
 	<body>
         <div id="master">
+            
             <div id="dashboard" class="btn-group">
                 <div id="name-and-photo">
                     <div id="photo"><img src="Koala.jpg" height="50px" width="50px"></div>
@@ -18,25 +19,45 @@
                 <button class="button" id="2" onclick="insertEditor()">Add Experience</button>
                 <button class="button" id="3" >Your Posts</button>
                 <button class="button" id="4" >Tips</button>
-                <button class="button" id="5" >Q/A</button>
+                <button class="button" id="5" onclick = "getQuestions()">Q/A</button>
                 <button class="button" id="6" >Company Preparation</button>
                 <button class="button" id="7" >About</button>
                 <button id="logout" class="button" id="8" onclick="handleSignOut()" >SignOut</button>
             </div>
+            
             <div id="displayPane">
                 <div id="loader" style="display: none;"></div>
                 <!--div id="editor"></div-->
-                <div id="cards" hidden>  </div>
-        
-                 <div id="cardcontent" hidden >
-                    <div id="description"></div>
-                    <div id="comments"></div>
-                    <span id="close" onclick="gotoCards()">CLOSE</span>
+                <div id="cards"  style="display:none">  </div>
+                
+                 <div id="cardcontent" style="display:none" >
+                     
+                        <span id="close" onclick="gotoCards()">CLOSE</span>
+                        <div id="description" ></div>
+                        <label>COMMENT::</label><input type="text" id="comment-box" placeholder="leave your comment here">
+                        <button id="comment-button" onclick="insertComment()">COMMENT</button>
+                        <div id="comments"></div>
+                     
                 </div>
                 
-                <iframe src = "editor.html" id = "editor" width = "100%" height="100%" style="border:none;" hidden ></iframe>
+                <div id="questions" style="display:none">
+                    <input type="text" id="questionbox" placeholder="post your question here"><button onclick="insertQuestion()">POST QUESTION</button>
+                    <div id="questionlist"></div>
+                </div>
+                
+                <div id="questioncontent" style="display:none">
+                    <span id="close" onclick="gotoQuestions()">CLOSE</span>
+                    <div id="question"></div>
+                    <label>ANSWER::</label><input type="text" id="answer-box" placeholder="leave your answer here">
+                    <button id="answer-button" onclick="insertAnswer()">YOUR ANSWER</button>
+                    <div id="answers"></div>
+                </div>
+                
+                <iframe src = "editor.html" id = "editor" width = "75%" height="100%" style="border:none;display:none" hidden ></iframe>
             </div>
+            
         </div>
+        
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
 		<script src = "js/appconfig.js"></script> 
