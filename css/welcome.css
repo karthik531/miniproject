@@ -12,7 +12,6 @@
     font-family: sans-serif;
     font-size: 18;
     color: white;
-    background-color: darkcyan;
     margin: 5px;
 }
 #profile-pic
@@ -154,17 +153,19 @@ button:hover{
 }
 #ind-comment
 {
-    background-color: lightblue;
+    background-color: white;
     width: auto;
     color: white;
     height: auto;
     padding: 2px;
     margin: 15px 5px;
-    border-radius: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 #cusername  /*comment username*/
 {
     background-color: darkcyan;
+    border-radius: 10px;
     padding: 5px;
     font-size: 18px;
     margin: 0px 0px auto 0px;
