@@ -3,7 +3,7 @@
     font-family: monospace;
     font-size: 20;
     color: black;
-    background-color: gold;
+    background-color: greenyellow;
     margin: 0px;
     padding: 10px;
 }
@@ -14,19 +14,85 @@
 }
 #dashboard
 {	
-	width: 25%;
+	width: 20%;
 	height: 100%;
 	background-color: #41495C;
 	float:left;
     margin: 0px;
+    position: fixed;
 }
 #displayPane
 {
-	/*width:940px;*/
-	height:100%;
-	/*border:1px solid #E9ECF1;*/
-	background-color: white;
+	width: 80%;
+	height: 100%;
+	float: right;
+    margin-left: 0px;
+    background-color: white;
 }
+
+/*===============CARDS DISPLAY CSS====================*/
+#cards
+{
+    margin: 20px 10px;
+    font-family: Calibri, sans-serif;
+    color: darkgreen;
+    font-style: oblique;
+    font-size: 18px;
+}
+#ind-card
+{
+    background-color: floralwhite;
+    width: 90%;
+    height: 15%;
+    margin-left: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#ind-card:hover
+{
+    box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#company-name
+{
+    margin:10px;
+    float:left;
+}
+#user-name
+{
+    margin: 10px;
+    float: right;
+}
+#views
+{
+    margin:auto 20px;
+}
+#close
+{
+    margin: 10px;
+    float:right;
+}
+#cardcontent
+{
+    background-color: floralwhite;
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: green;
+    font-family: Calibri, sans-serif;
+    font-style: oblique;
+}
+#description
+{
+    margin: 10px;
+}
+#comments
+{
+    margin: 10px;
+}
+/*===================CARDS STYLING COMPLETE===================*/
 /*ul li
 {
 	margin-top:20px;
@@ -82,17 +148,17 @@ button:hover{
 
 #loader {
   position: absolute;
-  left: 65%;
-  top: 50%;
+  left: 63%;
+  top: 55%;
   z-index: 1;
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   margin: -75px 0 0 -75px;
-  border: 12px solid #f3f3f3;
+  border: 8px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 12px solid #3498db;
-  width: 80px;
-  height: 80px;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }

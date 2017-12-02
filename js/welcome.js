@@ -9,11 +9,11 @@ function handleSignOut()
     firebase.auth().signOut();
 }
 
-function displayEditor()
+/*function displayEditor()
 {
     document.getElementById("loader").style.display = "none";
     document.getElementById("editor").style.display = "block";
-}
+}*/
 
 function displaySupporter(x)
 {
@@ -127,6 +127,8 @@ function insertAnswer()
 
 function getInterviewExperiences()
 {
+    document.getElementById("editor").style.display = "none";
+    document.getElementById("loader").style.display = "block";
 	path = firebase.firestore().collection("posts");
    
     path.onSnapshot(function(querySnapshot) 
@@ -138,13 +140,15 @@ function getInterviewExperiences()
                 docIdString = docIdString+'<div id ="ind-card" onclick=getAllContent("'+doc.id+'")>'+
                 '<span id="company-name">'+doc.data().company+'</span>'+
                 '<span id="user-name">'+doc.data().username+'</span>'+
-                '</div>'
+                '</div><br>'
             });
-        
+    
+            document.getElementById("loader").style.display = "none";
             var x = document.getElementById("cards").style.display;
             displaySupporter(x);
             document.getElementById("cards").style.display = "block";
             presentId = "cards";
+            document.getElementById("cardcontent").style.display = "none";
             document.getElementById("cards").innerHTML = docIdString;
     });
 }
@@ -209,15 +213,13 @@ function getAllComments()
     commentpath.onSnapshot(function(querySnapshot) 
     {
         var commentString = "";
-        
         querySnapshot.forEach(function(doc) 
         {
             username = doc.data().username;
             comment = doc.data().comment;
-            commentString += "<p id='cusername'>"+ username +"</p>"
-            commentString+="<p id='comment'>"+ comment +"</p>"    
+            commentString += "<div id='ind-comment'><p id='cusername'>"+ username +"</p>"
+            commentString+="<p id='comment'>"+ comment +"</p></div>"    
         });
-        
         document.getElementById("comments").innerHTML = commentString;
     });
 }
@@ -270,7 +272,14 @@ function initApp()
     });
 }
 
-
+function changeCloseImage()
+{
+    document.getElementById("close-image").src = "backbutton-final.jpg";
+}
+function revertCloseImage()
+{
+    document.getElementById("close-image").src = "backbutton-init.png";
+}
 
  /* function getName(mail){
 	 var cookies = document.cookie;
