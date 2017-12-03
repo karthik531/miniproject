@@ -224,7 +224,11 @@ button:hover{
 }
 #ind-question
 {
-    width: 100%;
+    
+}
+#user-name
+{
+    float: right;
 }
 /*===================END OF DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
 
