@@ -32,8 +32,8 @@
                 
                  <div id="cardcontent" style="display:none" >
                      
-                        <div id="close" onclick="gotoCards()">
-                            <img id="close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                        <div id="exp-close" onclick="gotoCards()">
+                            <img id="exp-close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
                         </div>
                         <div id="main-content">
                             <div id="description" ></div>
@@ -46,6 +46,7 @@
                 </div>
                 
                 <div id="questions" style="display:none">
+                    <label id="question-heading">QUESTIONS</label><br>
                     <textarea id="questionbox" placeholder="Post your question here" rows="3" cols="50"></textarea>
                     <br>
                     <button class="q-button q-button1" onclick="insertQuestion()">Post</button>
@@ -53,11 +54,17 @@
                 </div>
                 
                 <div id="questioncontent" style="display:none">
-                    <span id="close" onclick="gotoQuestions()">CLOSE</span>
-                    <div id="question"></div>
-                    <label>ANSWER::</label><input type="text" id="answer-box" placeholder="leave your answer here">
-                    <button id="answer-button" onclick="insertAnswer()">YOUR ANSWER</button>
-                    <div id="answers"></div>
+                    <div id="question-close" onclick="gotoQuestions()">
+                        <img id="question-close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                    </div>
+                    <div id="answer-content">
+                        <div id="question"></div>
+                        <label id="answer-heading">ANSWERS</label><br>
+                        <textarea placeholder="Post your answer here" id="answer-box" rows="3" cols="50"></textarea>
+                        <br>
+                        <button class="a-button a-button1" onclick="insertAnswer()">Post</button>
+                        <div id="answers"></div>
+                    </div>
                 </div>
                 
                 <iframe src = "editor.html" id = "editor" width = "100%" height="100%" style="border:none;display:none" hidden ></iframe>
