@@ -117,7 +117,7 @@ button:hover{
 	background-color:#9CD2F5;
 }*/
 
-/*===================DESCRIPTION AND COMMENTS STYLING======================*/
+/*===================DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
 #close
 {
     margin: 0px;
@@ -190,7 +190,7 @@ button:hover{
     border-radius: 10px;
     background-color: lightblue;
 }
-#comment-box
+#comment-box, #questionbox
 {
     font-family: sans-serif;
     font-size: 18px;
@@ -199,7 +199,7 @@ button:hover{
     width: 80%;
     height: 10%;
 }
-.cmnt-button{
+.cmnt-button, .q-button{
     background-color: cadetblue; /* Green */
     border: none;
     border-radius: 8px;
@@ -212,17 +212,21 @@ button:hover{
     display: inline-block;
     font-size: 18px;
 }
-.cmnt-button1 {
+.cmnt-button1, .q-button1 {
     background-color: white; 
     color: black; 
     border: 2px solid cadetblue;
 }
 
-.cmnt-button1:hover {
+.cmnt-button1, .q-button1:hover {
     background-color: cadetblue;
     color: white;
 }
-/*===================END OF DESCRIPTION AND COMMENTS STYLING======================*/
+#ind-question
+{
+    width: 100%;
+}
+/*===================END OF DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
 
 .btn-group .button {
     background-color: #41495C; /* Green */
