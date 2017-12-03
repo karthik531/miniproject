@@ -63,9 +63,10 @@ function manageSignup()
 function insertInfoAndProceed()
 {
 			var docData = {
-				useremail: user_ref.email,
-				username: name,
-				userid: user_ref.uid
+				email: user_ref.email,
+                uid: user_ref.uid,
+                uname: name,
+                verified: false
 			};
 			var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
 			db.get().then(function(query)

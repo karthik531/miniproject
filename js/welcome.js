@@ -4,6 +4,7 @@ window.onload = function()
     firstClick = true;
 };
 
+
 function handleSignOut()
 {
     firebase.auth().signOut();
@@ -44,7 +45,8 @@ function insertQuestion()
         return;
     }
     var user_name = document.getElementById("und").innerHTML;
-    var questionData = {username : user_name , question: question,views: 0};
+    alert(user_ref.uid)
+    var questionData = {question: question,uid: user_ref.uid,username : user_name ,views: 0};
     var promise = firebase.firestore().collection("questions").doc().set(questionData);
     
 }
@@ -75,30 +77,35 @@ function getQuestions()
 
 function getQuestionContent(docId)
 {
-    document.getElementById("questions").style.display = "none";
-    document.getElementById("questioncontent").style.display = "block";
-    presentId = "questioncontent";
     var questionpath = firebase.firestore().collection("questions").doc(docId);
-    
     answerpath = questionpath.collection("comments");
     
     questionpath.get().then(function(doc)
     {
         if(doc && doc.exists)
         {
-    
-            document.getElementById("question").innerHTML = doc.data().question;
+            var count = doc.data().views+1;
+            questionpath.update({views:count}).then(function()
+            {
+                document.getElementById("questions").style.display = "none";
+                document.getElementById("questioncontent").style.display = "block";
+                presentId = "questioncontent";
+                document.getElementById("question").innerHTML = doc.data().question;
+               
+            });
+            
         }
+         getAllAnswers(); 
     });
-    getAllAnswers();
-
+   
+   
 }
 function getAllAnswers()
 {
     answerpath.onSnapshot(function(querySnapshot) 
     {
         var answerString = "";
-        
+        alert("INSNAP");
         querySnapshot.forEach(function(doc) 
         {
             username = doc.data().username;
@@ -120,9 +127,12 @@ function insertAnswer()
     else
     {
         var user_name = document.getElementById("und").innerHTML;
-        var answerData = {username : user_name , comment : answer};
+        var now = new Date(); 
+        var user_uid = user_ref.uid;
+var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+        var answerData = {comment: answer,time: utc,uid: user_uid,username: user_name};
         var promise = answerpath.doc().set(answerData);
-    }
+    }//else
 }
 
 function getInterviewExperiences()

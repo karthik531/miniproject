@@ -76,9 +76,10 @@ function initLoginProcess()
 function insertGoogleCredentials()
 {
 	var docData = {
-		useremail: user_ref.email,
-		username: user_ref.displayName,
-		userid: user_ref.uid
+		email: user_ref.email,
+        uid: user_ref.uid,
+        uname: name,
+        verified: true
 	};
 	var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
 	db.get().then(function(query)
