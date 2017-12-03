@@ -37,7 +37,7 @@
 #displayPane
 {
 	width: 80%;
-	height: 100%;
+	height: auto;
 	float: right;
     margin-left: 0px;
     top: 0;
@@ -145,6 +145,7 @@ button:hover{
     padding: 5px;
     border: 1px black dashed;
     border-radius: 5px;
+    background-color: white;
 }
 #question
 {
@@ -202,31 +203,39 @@ button:hover{
 {
     font-family: sans-serif;
     font-size: 18px;
-    margin: 15px;
+    margin: 0px;
     margin-bottom: 0px;
-    width: 80%;
+    width: auto;
     height: 10%;
+    border-radius: 8px;
+    display: inline-block;
 }
-.cmnt-button, .q-button, .a-button{             /*RESPECTIVE "POST" BUTTONS*/
-    background-color: cadetblue; /* Green */
+.text-entry
+{
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+.cmnt-button, .q-button, .a-button{             /*RESPECTIVE "POST" BUTTONS AFTER ANIMATIONS*/
+    background-color: cadetblue; 
     border: none;
     border-radius: 8px;
     color: white;
-    padding: 8px 15px;
-    margin: 0px 0px 15px 15px;
+    padding: 6px 19px;
+    margin: 0px;
     text-align: center;
     text-decoration: none;
     transition-duration: 0.4s;
     display: inline-block;
-    font-size: 18px;
+    font-size: 20px;
 }
-.cmnt-button1, .q-button1, .a-button1 {         /*RESPECTIVE "POST" BUTTON ANIMATION*/
+.cmnt-button1, .q-button1, .a-button1 {         /*RESPECTIVE "POST" BUTTONS BEFORE ANIMATION*/
     background-color: white; 
     color: black; 
     border: 2px solid cadetblue;
 }
 
-.cmnt-button1, .q-button1, .a-button1:hover {   /*RESPECTIVE "POST" BUTTON ANIMATION*/
+.cmnt-button1:hover, .q-button1:hover, .a-button1:hover {   /*RESPECTIVE "POST" BUTTON ANIMATION*/
     background-color: cadetblue;
     color: white;
 }
@@ -234,7 +243,7 @@ button:hover{
 /*===================END OF DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
 
 .btn-group .button {
-    background-color: #41495C; /* Green */
+    background-color: #41495C; 
     border: 1px solid #41495C;
     color: white;
     padding: 15px 32px;

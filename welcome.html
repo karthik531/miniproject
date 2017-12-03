@@ -38,18 +38,24 @@
                         <div id="main-content">
                             <div id="description" ></div>
                             <label ID="comment-heading">COMMENTS</label><br>
-                            <textarea placeholder="Leave your comment here" id="comment-box" rows="3" cols="50"></textarea>
-                            <br>
-                            <button class="cmnt-button cmnt-button1" onclick="insertComment()">Post</button>
+                            <table class="text-entry">
+                                <tr>
+                                    <td><textarea id="comment-box" placeholder="Leave your comment here" rows="3" cols="100"></textarea></td>
+                                    <td><button class="cmnt-button cmnt-button1" onclick="insertComment()">Post</button></td>
+                                </tr>
+                            </table>
                             <div id="comments"></div>
                         </div>
                 </div>
                 
                 <div id="questions" style="display:none">
-                    <label id="question-heading">QUESTIONS</label><br>
-                    <textarea id="questionbox" placeholder="Post your question here" rows="3" cols="50"></textarea>
-                    <br>
-                    <button class="q-button q-button1" onclick="insertQuestion()">Post</button>
+                    <table class="text-entry">
+                        <tr>
+                            <td><textarea id="questionbox" placeholder="Post your question here" rows="3" cols="100"></textarea></td>
+                            <td><button class="q-button q-button1" onclick="insertQuestion()">Post</button></td>
+                        </tr>
+                    </table>
+                    <label id="question-heading">QUESTIONS</label>
                     <div id="questionlist"></div>
                 </div>
                 
@@ -59,10 +65,12 @@
                     </div>
                     <div id="answer-content">
                         <div id="question"></div>
-                        <label id="answer-heading">ANSWERS</label><br>
-                        <textarea placeholder="Post your answer here" id="answer-box" rows="3" cols="50"></textarea>
-                        <br>
-                        <button class="a-button a-button1" onclick="insertAnswer()">Post</button>
+                        <table class="text-entry">
+                            <tr>
+                                <td><textarea id="answer-box" placeholder="Post your answer here" rows="3" cols="100"></textarea></td>
+                                <td><button class="a-button a-button1" onclick="insertAnswer()">Post</button></td>
+                            </tr>
+                        </table>
                         <div id="answers"></div>
                     </div>
                 </div>
