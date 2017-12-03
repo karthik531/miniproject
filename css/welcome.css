@@ -82,7 +82,7 @@
 {
     margin:auto 20px;
 }
-#cardcontent
+#cardcontent, #questioncontent
 {
     background-color: white;
     width: 100%;
@@ -117,8 +117,8 @@ button:hover{
 	background-color:#9CD2F5;
 }*/
 
-/*===================DESCRIPTION AND COMMENTS STYLING======================*/
-#close
+/*===================DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
+#exp-close, #question-close
 {
     margin: 0px;
     position: fixed;
@@ -126,32 +126,36 @@ button:hover{
     background-color: #f7f7f7;
     top: 0;
 }
-#close-image
+#exp-close-image, #question-close-image
 {
     height: 40px;
     width: 40px;
     border-radius: 15px;
     cursor: pointer;
 }
-#main-content
+#main-content, #answer-content  /*RESPECTIVE CONTENTS*/
 {
     margin-top: 45px;
     background-color: #f7f7f7;
 }
-#description
+#description, #question     /*INTERVIEW EXPERIENCE DESCRIPTION, DISPLAY RESPECTIVE QUESTION IN ANSWERS SECTION*/
 {
     margin: 15px;
     margin-bottom: 20px;
     padding: 5px;
-    border: 3px black solid;
+    border: 1px black dashed;
     border-radius: 5px;
 }
-#comments
+#question
+{
+    font-size: 25;
+}
+#comments, #questionlist, #answers  /*COLLECTION OF RESPECTIVE ITEMS*/
 {
     margin: 5px;
     margin-top: 15px;
 }
-#ind-comment
+#ind-comment, #ind-question, #ind-answer    /*RESPECTIVE USERNAME+CONTENT*/
 {
     background-color: white;
     width: auto;
@@ -159,10 +163,14 @@ button:hover{
     height: auto;
     padding: 2px;
     margin: 15px 5px;
-    border: 1px solid black;
+    border: 1px dashed black;
     border-radius: 10px;
 }
-#cusername  /*comment username*/
+#ind-question
+{
+    cursor: pointer;
+}
+#cusername, #qusername, #ausername  /*comment username, question username, answer username*/
 {
     background-color: darkcyan;
     border-radius: 10px;
@@ -171,14 +179,14 @@ button:hover{
     margin: 0px 0px auto 0px;
     font-family: sans-serif;
 }
-#comment
+#comment, #question-text, #answer   /*RESPECTIVE CONTENT*/
 {
     color: black;
     font-family: sans-serif;
     font-size: 16px;
     padding: 5px;
 }
-#comment-heading
+#comment-heading, #question-heading, #answer-heading    /*RESPECTIVE HEADINGS*/
 {
     font-family: sans-serif;
     font-size: 20px;
@@ -186,11 +194,11 @@ button:hover{
     height: 10%;
     padding: 5px;
     margin: 15px;
-    border: 1px solid;
+    border: 1px dashed;
     border-radius: 10px;
     background-color: lightblue;
 }
-#comment-box
+#comment-box, #questionbox, #answer-box     /*RESPECTIVE TEXTAREA*/
 {
     font-family: sans-serif;
     font-size: 18px;
@@ -199,7 +207,7 @@ button:hover{
     width: 80%;
     height: 10%;
 }
-.cmnt-button{
+.cmnt-button, .q-button, .a-button{             /*RESPECTIVE "POST" BUTTONS*/
     background-color: cadetblue; /* Green */
     border: none;
     border-radius: 8px;
@@ -212,17 +220,18 @@ button:hover{
     display: inline-block;
     font-size: 18px;
 }
-.cmnt-button1 {
+.cmnt-button1, .q-button1, .a-button1 {         /*RESPECTIVE "POST" BUTTON ANIMATION*/
     background-color: white; 
     color: black; 
     border: 2px solid cadetblue;
 }
 
-.cmnt-button1:hover {
+.cmnt-button1, .q-button1, .a-button1:hover {   /*RESPECTIVE "POST" BUTTON ANIMATION*/
     background-color: cadetblue;
     color: white;
 }
-/*===================END OF DESCRIPTION AND COMMENTS STYLING======================*/
+
+/*===================END OF DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
 
 .btn-group .button {
     background-color: #41495C; /* Green */

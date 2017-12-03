@@ -53,6 +53,10 @@ function insertQuestion()
 
 function getQuestions()
 {
+    document.getElementById("editor").style.display = "none";
+    document.getElementById("cards").style.display = "none";
+    document.getElementById("loader").style.display = "block";
+    
     var question_path = firebase.firestore().collection("questions");
    
     question_path.onSnapshot(function(querySnapshot) 
@@ -62,11 +66,12 @@ function getQuestions()
             { 
 
                 questionString = questionString+'<div id ="ind-question" onclick=getQuestionContent("'+doc.id+'")>'+
-                '<span id="indquestion">'+doc.data().question+'</span>'+
-                '<span id="user-name">'+doc.data().username+'</span>'+
+                '<p id="qusername">'+doc.data().username+'</p>'+
+                '<p id="question-text">'+doc.data().question+'</p>'+
                 '</div>'
             });
         
+            document.getElementById("loader").style.display = "none";
             var x = document.getElementById("questions").style.display;
             displaySupporter(x);
             document.getElementById("questions").style.display = "block";
@@ -110,8 +115,8 @@ function getAllAnswers()
         {
             username = doc.data().username;
             comment = doc.data().comment;
-            answerString += "<p id='ausername'>"+ username +"</p>"
-            answerString+="<p id='answer'>"+ comment +"</p>"    
+            answerString += "<div id='ind-answer'><p id='ausername'>"+ username +"</p>"
+            answerString+="<p id='answer'>"+ comment +"</p></div>"    
         });
         
         document.getElementById("answers").innerHTML = answerString;
@@ -284,11 +289,13 @@ function initApp()
 
 function changeCloseImage()
 {
-    document.getElementById("close-image").src = "backbutton-final.jpg";
+    document.getElementById("exp-close-image").src = "backbutton-final.jpg";
+    document.getElementById("question-close-image").src = "backbutton-final.jpg";
 }
 function revertCloseImage()
 {
-    document.getElementById("close-image").src = "backbutton-init.png";
+    document.getElementById("exp-close-image").src = "backbutton-init.png";
+    document.getElementById("question-close-image").src = "backbutton-init.png";
 }
 
  /* function getName(mail){
