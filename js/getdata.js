@@ -15,22 +15,29 @@ function insertPost()
 }
 function continueInsertPost()
 {
-	var user_mail = user_ref.email;
+	//var user_mail = user_ref.email;
 	var user_name = localStorage.getItem(user_ref.email);
 	var title_name = document.getElementById("titleID").value.toUpperCase();
 	var company_name= document.getElementById("companyID").value.toUpperCase();
-	var content =  tinymce.get("texteditor").getContent()
-	var d = new Date();
-	var time_stamp = d.getTime();
+	var content =  tinymce.get("texteditor").getContent();
+    var user_id = user_ref.uid;
+    var isHired = false;
+    if(document.getElementById("hired").checked==true)
+    {
+        isHired = true;
+    }
+	//var d = new Date();
+	//var time_stamp = d.getTime();
 	var experience = {
-		timestamp: time_stamp,
-		useremail: user_mail,
-		username: user_name,
-		company: company_name,
-		title: title_name,
-		description: content
+		companyName: company_name,
+        description: content,
+        isHired: isHired,
+        title: title_name,
+        uid: user_id,
+        username: user_name,
+        views: 0
 	};
-	var postRef = firebase.firestore().collection("posts").doc();
+	var postRef = firebase.firestore().collection("ie").doc();
 	var colRef = firebase.firestore().collection("company");
 	colRef.where("name", "==", company_name).get().then(function(querySnapshot) 
 	{
@@ -53,8 +60,14 @@ function continueInsertPost()
 		}
 	});
 	postRef.set(experience).then(function(){
-		console.log("Document successfully written!");
-	}).catch(function(error) {
-	console.error("Error writing document: ", error);
+		//console.log("Document successfully written!");
+        document.getElementById("titleID").value="";
+        document.getElementById("companyID").value="";
+        tinymce.get("texteditor").setContent("");
+        document.getElementById("hired").checked = false;
+        alert("post submitted");
+	}).catch(function(error) 
+    {
+	    console.error("Error writing document: ", error);
 	}); 
 }
