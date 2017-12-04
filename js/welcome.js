@@ -96,7 +96,9 @@ function getQuestionContent(docId)
                 document.getElementById("questioncontent").style.display = "block";
                 presentId = "questioncontent";
                 document.getElementById("question").innerHTML = doc.data().question;
-               
+                
+                mail_uid = doc.data().uid;  //used for email notification
+                
             });
             
         }
@@ -105,12 +107,12 @@ function getQuestionContent(docId)
    
    
 }
+
 function getAllAnswers()
 {
     answerpath.onSnapshot(function(querySnapshot) 
     {
         var answerString = "";
-        alert("INSNAP");
         querySnapshot.forEach(function(doc) 
         {
             username = doc.data().username;
@@ -122,6 +124,7 @@ function getAllAnswers()
         document.getElementById("answers").innerHTML = answerString;
     });
 }
+
 function insertAnswer()
 {
     var answer = document.getElementById("answer-box").value;
@@ -136,15 +139,48 @@ function insertAnswer()
         var user_uid = user_ref.uid;
 var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
         var answerData = {comment: answer,time: utc,uid: user_uid,username: user_name};
-        var promise = answerpath.doc().set(answerData);
+        var promise = answerpath.doc().set(answerData).then(function(){
+            
+            if(user_uid!=mail_uid){
+                
+                var db  = firebase.firestore().collection("users").where("uid","==",mail_uid);
+                
+                db.get().then(function(querySnapshot) 
+                {
+                    querySnapshot.forEach(function(doc) 
+                    {
+                        var toEmail = doc.data().email;
+                        var rusername = doc.data().uname;                       
+                        var message = answer;
+                        var qstn =  document.getElementById("question").innerHTML;
+                        alert(user_name);
+                        sendMail(toEmail,answer,rusername,user_name,qstn);
+                    });
+                });
+            }
+            
+        });
     }//else
 }
 
+function sendMail(toEmail,answer,rusername,susername,qstn)
+{
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+    }
+  };
+  
+  xhttp.open("POST", "sendmail.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send('tomail=pokeavathar@gmail.com&question='+qstn+'&message='+answer+'&rusername='+rusername+'&susername='+susername);
+}
 function getInterviewExperiences()
 {
-    document.getElementById("editor").style.display = "none";
-    document.getElementById("loader").style.display = "block";
-	path = firebase.firestore().collection("posts");
+    //document.getElementById("editor").style.display = "none";
+    //document.getElementById("loader").style.display = "block";
+	path = firebase.firestore().collection("ie");
    
     path.onSnapshot(function(querySnapshot) 
     {
@@ -153,12 +189,12 @@ function getInterviewExperiences()
             { 
 
                 docIdString = docIdString+'<div id ="ind-card" onclick=getAllContent("'+doc.id+'")>'+
-                '<span id="company-name">'+doc.data().company+'</span>'+
+                '<span id="company-name">'+doc.data().companyName+'</span>'+
                 '<span id="user-name">'+doc.data().username+'</span>'+
                 '</div><br>'
             });
     
-            document.getElementById("loader").style.display = "none";
+            //document.getElementById("loader").style.display = "none";
             var x = document.getElementById("cards").style.display;
             displaySupporter(x);
             document.getElementById("cards").style.display = "block";
@@ -184,22 +220,26 @@ function gotoQuestions()
 
 function getAllContent(docId)
 {
-    document.getElementById("cards").style.display = "none";
-    document.getElementById("cardcontent").style.display = "block";
-    presentId = "cardcontent";
-   
     document.getElementById("description").innerHTML = "";
     document.getElementById("comments").innerHTML = "";
     
-    var descriptionPath = path.doc(docId);
+    var descriptionpath = path.doc(docId);
     
-    commentpath = descriptionPath.collection("comments");
+    commentpath = descriptionpath.collection("comments");
     
-    descriptionPath.get().then(function(doc)
+    descriptionpath.get().then(function(doc)
     {
         if(doc && doc.exists)
         {
-            document.getElementById("description").innerHTML = doc.data().description;
+            //document.getElementById("description").innerHTML = doc.data().description;
+            var count = doc.data().views+1;
+            descriptionpath.update({views:count}).then(function()
+            {
+                document.getElementById("cards").style.display = "none";
+                document.getElementById("cardcontent").style.display = "block";
+                presentId = "cardcontent";
+                document.getElementById("description").innerHTML = doc.data().description;
+            });
         }
     });
 
@@ -216,7 +256,9 @@ function insertComment()
     else
     {
         var user_name = document.getElementById("und").innerHTML;
-        var commentData = {username : user_name , comment : com};
+         var now = new Date(); 
+var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+        var commentData = {comment:com,time:utc,username:user_name};
         var promise = commentpath.doc().set(commentData);
     }
 }
@@ -250,13 +292,13 @@ function getName()
 		}
 		else         
 		{
-			var query = firebase.firestore().collection("users").where("useremail", "==", user_ref.email);
+			var query = firebase.firestore().collection("users").where("email", "==", user_ref.email);
 			query.get().then(function(querySnapshot) 
 			{
 				if(!querySnapshot.empty)
 				{
 					var docRef = querySnapshot.docs[0];
-					var user_name = docRef.data().username;
+					var user_name = docRef.data().uname;
 					localStorage.setItem(user_ref.email,user_name);
 					document.getElementById("und").innerHTML = user_name;
 				}
