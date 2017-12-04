@@ -54,8 +54,17 @@ function manageSignup()
 	    {
             if(user)
             {
-                user_ref = user;
-                insertInfoAndProceed();
+                //USER EMAIL VERIFICATION
+                user.sendEmailVerification().then(function(){
+                    //email sent
+                    alert("Verification email sent");
+                    user_ref = user;
+                    //insertInfoAndProceed();
+                }).catch(function(error){
+                   //error sending mail
+                    alert("Email verification failed. Try again");
+                });
+                
             }
         });
     }
