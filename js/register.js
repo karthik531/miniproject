@@ -55,16 +55,16 @@ function manageSignup()
             if(user)
             {
                 //USER EMAIL VERIFICATION
-                user.sendEmailVerification().then(function(){
-                    //email sent
+                var actionCodeSettings = {
+                    url: 'https://testing-42588.firebaseapp.com/user-verification.html?email=' + user.email
+                }
+                firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
+                  .then(function() {
                     alert("Verification email sent");
-                    user_ref = user;
-                    //insertInfoAndProceed();
-                }).catch(function(error){
-                   //error sending mail
-                    alert("Email verification failed. Try again");
-                });
-                
+                  })
+                  .catch(function(error) {
+                    alert("Error occurred");
+                  });
             }
         });
     }

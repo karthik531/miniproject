@@ -1,0 +1,47 @@
+<body>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // TODO: Implement getParameterByName()
+
+      // Get the action to complete.
+      var mode = getParameterByName('mode');
+      // Get the one-time code from the query parameter.
+      var actionCode = getParameterByName('oobCode');
+      // (Optional) Get the API key from the query parameter.
+      var apiKey = getParameterByName('apiKey');
+      // (Optional) Get the continue URL from the query parameter if available.
+      var email = getParameterByName('email');
+
+      // Configure the Firebase SDK.
+      // This is the minimum configuration required for the API to be used.
+      var config = {
+        'apiKey': apiKey  // This key could also be copied from the web
+                          // initialization snippet found in the Firebase console.
+      };
+      var app = firebase.initializeApp(config);
+      var auth = app.auth();
+
+      // Handle the user management action.
+      switch (mode) {
+        case 'verifyEmail':
+          // Display email verification handler and UI.
+          handleVerifyEmail(auth, actionCode, continueUrl);
+          break;
+        default:
+          // Error: invalid mode.
+      }
+    }, false);
+    function handleVerifyEmail(auth, actionCode, continueUrl) {
+      // Try to apply the email verification code.
+      auth.applyActionCode(actionCode).then(function(resp) {
+        alert("email verified "+firebase.auth().currentUser.emailVerified);
+        
+      }).catch(function(error) {
+        // Code is invalid or expired. Ask the user to verify their email address
+        // again.
+          alert("failed");
+      });
+    }
+    </script>
+</body>
