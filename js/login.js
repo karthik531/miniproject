@@ -69,7 +69,25 @@ function initLoginProcess()
 					insertGoogleCredentials();
 				}
 				else
-				window.location.href = "welcome.html";
+                {
+                    var query = firebase.firestore().collection("users").where("uid", "==", user.uid);					
+                    query.get().then(function(querySnapshot)
+                    {
+                        querySnapshot.forEach(function(doc) 
+                        {
+                            var val = doc.data().verified;
+                            if(val){
+                                window.location.href = "welcome.html"
+                            }
+                            else{
+                                window.location.html = "index.html"
+                                alert("verify your mail");
+                            }
+                        });
+        
+                    });
+				    
+                }
         }
     });
 }

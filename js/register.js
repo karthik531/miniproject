@@ -68,15 +68,16 @@ function insertInfoAndProceed()
                 uname: name,
                 verified: false
 			};
-			var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
-			db.get().then(function(query)
-			{
-				if(query.empty)
-				{
+			//var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
+			//db.get().then(function(query)
+			//{
+				//if(query.empty)
+				//{
 					firebase.firestore().collection("users").doc().set(docData).then(function() 
 					{
-					window.location.href = "welcome.html";
+					//window.location.href = "welcome.html";
+                        alert("VERIFY EMAIL");
 					});
-				}
-			});
+				//}
+			//});
 }
