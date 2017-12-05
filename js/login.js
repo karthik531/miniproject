@@ -69,16 +69,35 @@ function initLoginProcess()
 					insertGoogleCredentials();
 				}
 				else
-				window.location.href = "welcome.html";
+                {
+                    var query = firebase.firestore().collection("users").where("uid", "==", user.uid);					
+                    query.get().then(function(querySnapshot)
+                    {
+                        querySnapshot.forEach(function(doc) 
+                        {
+                            var val = doc.data().verified;
+                            if(val){
+                                window.location.href = "welcome.html"
+                            }
+                            else{
+                                window.location.html = "index.html"
+                                alert("verify your mail");
+                            }
+                        });
+        
+                    });
+				    
+                }
         }
     });
 }
 function insertGoogleCredentials()
 {
 	var docData = {
-		useremail: user_ref.email,
-		username: user_ref.displayName,
-		userid: user_ref.uid
+		email: user_ref.email,
+        uid: user_ref.uid,
+        uname: name,
+        verified: true
 	};
 	var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
 	db.get().then(function(query)

@@ -2,33 +2,46 @@
 	<head>
 		<title>C language tutorial</title>
 		<link rel="stylesheet" type="text/css" href="css/welcome.css">
-		<script src="js/welcome.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/editor.css">
+		<script type="text/javascript" src="js/welcome.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="plugin/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript" src="plugin/tinymce/init-tinymce.js"></script>
         
 	</head>
 	<body>
         <div id="master">
             
             <div id="dashboard" class="btn-group">
+                
                 <div id="name-and-photo">
                     <div id="photo"><img id="profile-pic" src="Koala.jpg" height="50px" width="50px"></div>
                     <div id="und"></div>
                     <div id="ued"></div>
                 </div>
+                
                 <!--p id="ued"></p-->
                 <button class="button" id="1" onclick="getInterviewExperiences()">Interview Experience</button>
                 <button class="button" id="2" onclick="insertEditor()">Add Experience</button>
-                <button class="button" id="3" >Your Posts</button>
+                <button class="button" id="3" onclick="getYourSubmissions()">Your Submissions</button>
                 <button class="button" id="4" >Tips</button>
                 <button class="button" id="5" onclick = "getQuestions()">Q/A</button>
                 <button class="button" id="6" >Company Preparation</button>
                 <button class="button" id="7" >About</button>
                 <button id="logout" class="button" id="8" onclick="handleSignOut()" >SignOut</button>
+                
             </div>
             
-            <div id="displayPane">
+        <div id="displayPane">
+                
                 <div id="loader" style="display: none;"></div>
                 <!--div id="editor"></div-->
                 <div id="cards"  style="display:none">  </div>
+                
+                <div id="your-submissions" style="display:none">
+                    <div id="yourcards" ></div>
+                    <div id="yourquestions" ></div>
+                </div>
                 
                  <div id="cardcontent" style="display:none" >
                      
@@ -46,7 +59,7 @@
                             </table>
                             <div id="comments"></div>
                         </div>
-                </div>
+                 </div>
                 
                 <div id="questions" style="display:none">
                     <table class="text-entry">
@@ -75,11 +88,36 @@
                     </div>
                 </div>
                 
-                <iframe src = "editor.html" id = "editor" width = "100%" height="100%" style="border:none;display:none" hidden ></iframe>
+                <!--<iframe src = "editor.html" id = "editor" width = "100%" height="100%" style="border:none;display:none" hidden ></iframe>-->
+                
+                <div id="editor" style="display:none">
+                    <header align="center">Authoring New Interview Experience</header>
+                    <table>
+                        <tr>
+                            <td><p id="title">TITLE</p></td>
+                            <td><input type="text" name="title" id="titleID" placeholder="enter your role" class="textfield"></td>
+                        </tr>
+                        <tr>
+                            <td><p id="company-name">COMPANY</p></td>
+                            <td><input type="text" name="title" id="companyID" placeholder="enter your company" class="textfield"></td>
+                            <td>&nbsp;</td>
+                            <td id="result-status">RESULT</td>
+                            <td><input type="checkbox" id="hired">
+                                <span style="font-family: calibri, sans-serif;font-size: 20px">Hired</span>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <table>
+                        <textarea class="tinymce" id="texteditor"></textarea>
+                        <button class = "button button1" onclick="insertPost()">Submit Experience</button>
+                    </table>
+                    
+                </div>
+                
             </div>
             
         </div>
-        
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
 		<script src = "js/kappconfig.js"></script> 
