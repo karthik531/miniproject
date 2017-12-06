@@ -1,23 +1,37 @@
 <body>
+    <div id="result" style="display:none">
+        
+    <h3><a id="continueURL" href="">CLICK HERE TO REDIRECT TO LOGIN PAGE</a></h3>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // TODO: Implement getParameterByName()
-
+    document.addEventListener('DOMContentLoaded', function() 
+    {
+      var queryString = window.location.search;
+	  queryString = queryString.substring(1);
+       
+      var parsedQueryString = getQueryString(queryString);
       // Get the action to complete.
-      var mode = getParameterByName('mode');
+      var mode = parsedQueryString['mode'];
+       
       // Get the one-time code from the query parameter.
-      var actionCode = getParameterByName('oobCode');
+      var actionCode = parsedQueryString['oobCode'];
+       
       // (Optional) Get the API key from the query parameter.
-      var apiKey = getParameterByName('apiKey');
-      // (Optional) Get the continue URL from the query parameter if available.
-      var email = getParameterByName('email');
-
+      var apiKey = parsedQueryString['apiKey'];
+      var continueURL = parsedQueryString['continueUrl'];
+      alert("continueURL "+ continueURL);
       // Configure the Firebase SDK.
       // This is the minimum configuration required for the API to be used.
-      var config = {
-        'apiKey': apiKey  // This key could also be copied from the web
-                          // initialization snippet found in the Firebase console.
+      var config = 
+      {
+        apiKey: apiKey,
+        authDomain: "vishnu-a7bac.firebaseapp.com",
+	    databaseURL: "https://vishnu-a7bac.firebaseio.com",
+	    projectId: "vishnu-a7bac",
+	    storageBucket: "vishnu-a7bac.appspot.com",
+	    messagingSenderId: "43664081987"
       };
       var app = firebase.initializeApp(config);
       var auth = app.auth();
@@ -26,22 +40,57 @@
       switch (mode) {
         case 'verifyEmail':
           // Display email verification handler and UI.
-          handleVerifyEmail(auth, actionCode, continueUrl);
+          handleVerifyEmail(auth, actionCode);
           break;
         default:
           // Error: invalid mode.
       }
     }, false);
-    function handleVerifyEmail(auth, actionCode, continueUrl) {
+    function handleVerifyEmail(auth, actionCode) {
       // Try to apply the email verification code.
-      auth.applyActionCode(actionCode).then(function(resp) {
-        alert("email verified "+firebase.auth().currentUser.emailVerified);
-        
+      auth.applyActionCode(actionCode).then(function(resp) 
+	  {
+        /*alert("email "+firebase.auth().currentUser.email+" verified "+firebase.auth().currentUser.emailVerified);
+		firebase.auth().currentUser.emailVerified = true;
+        alert("new verification="+firebase.auth().currentUser.emailVerified);*/
+       /* alert(firebase.auth().currentUser.emailVerified);
+        var db = firebase.firestore().collection("users").get().then(function(doc){
+           doc.forEach(function(ind_doc){
+               alert(ind_doc.data().uid);
+           }) ;
+        });*/
+          var email = firebase.auth().currentUser.email;
+          var uname = localStorage.getItem('uname');
+          var uid = firebase.auth().currentUser.uid;
+          var uname = localStorage.getItem('uname');
+          firebase.firestore().collection("users").doc().set({email:email,uid:uid,uname:uname,verified:true}).then(function(){
+              
+              document.getElementById("result").style.display = "block";
+              document.getElementById("continueURL").href = "index.html";
+          });
       }).catch(function(error) {
         // Code is invalid or expired. Ask the user to verify their email address
         // again.
-          alert("failed");
+          alert(error.code+"/"+error.message+"/"+error.name);
+          firebase.auth().currentUser.delete().then(function(){
+              alert("USER DELETED WITH ERROR")
+          });
       });
+    }
+
+	function getQueryString( queryString ) 
+	{
+		
+            var params = {}, queries, temp, i, l;
+            // Split into key/value pairs
+            queries = queryString.split("&");
+            // Convert the array of strings into an object
+            for ( i = 0, l = queries.length; i < l; i++ ) {
+                temp = queries[i].split('=');
+		
+                params[temp[0]] = temp[1];
+            }
+            return params;
     }
     </script>
 </body>
