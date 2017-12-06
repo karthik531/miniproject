@@ -6,6 +6,11 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
     <script>
+        function searchAndReplace(oldStr, newStr)
+        {
+            while(continueURL.search(oldStr)!=-1)
+                continueURL = continueURL.replace(oldStr, newStr);
+        }
     document.addEventListener('DOMContentLoaded', function() 
     {
       var queryString = window.location.search;
@@ -20,8 +25,23 @@
        
       // (Optional) Get the API key from the query parameter.
       var apiKey = parsedQueryString['apiKey'];
-      var continueURL = parsedQueryString['continueUrl'];
-      alert("continueURL "+ continueURL);
+      continueURL = parsedQueryString['continueUrl'];
+      searchAndReplace("%3F", "?");
+      searchAndReplace("%3A", ":");
+      searchAndReplace("%2F", "/");
+      searchAndReplace("%3D", "=");
+      searchAndReplace("%40", "@");
+      searchAndReplace("%26", "&");
+                alert(continueURL);
+        
+        queryString = continueURL;
+	  queryString = queryString.split('?');
+        continueURL = queryString[1];
+      var parsedURL = getQueryString(continueURL);
+        var email = parsedURL['email'];
+        var uname = parsedURL['username'];
+        var uid = parsedURL['uid'];
+        alert("email="+email+"||uname="+uname+"||uid="+uid);
       // Configure the Firebase SDK.
       // This is the minimum configuration required for the API to be used.
       var config = 
@@ -59,11 +79,7 @@
                alert(ind_doc.data().uid);
            }) ;
         });*/
-          var email = firebase.auth().currentUser.email;
-          var uname = localStorage.getItem('uname');
-          var uid = firebase.auth().currentUser.uid;
-          var uname = localStorage.getItem('uname');
-          firebase.firestore().collection("users").doc().set({email:email,uid:uid,uname:uname,verified:true}).then(function(){
+        firebase.firestore().collection("users").doc().set({email:email,uid:uid,uname:uname,verified:true}).then(function(){
               
               document.getElementById("result").style.display = "block";
               document.getElementById("continueURL").href = "index.html";
@@ -72,9 +88,6 @@
         // Code is invalid or expired. Ask the user to verify their email address
         // again.
           alert(error.code+"/"+error.message+"/"+error.name);
-          firebase.auth().currentUser.delete().then(function(){
-              alert("USER DELETED WITH ERROR")
-          });
       });
     }
 
@@ -87,8 +100,8 @@
             // Convert the array of strings into an object
             for ( i = 0, l = queries.length; i < l; i++ ) {
                 temp = queries[i].split('=');
-		
                 params[temp[0]] = temp[1];
+                alert(temp[0]+"||"+temp[1]);
             }
             return params;
     }
