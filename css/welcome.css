@@ -45,7 +45,7 @@
 }
 
 /*===============CARDS DISPLAY CSS====================*/
-#cards
+#cards, #yourcards
 {
     margin: 20px 10px;
     font-family: Calibri, sans-serif;
@@ -72,6 +72,8 @@
 {
     margin:10px;
     float:left;
+    background-color: white;
+    color: black;
 }
 #user-name
 {
@@ -151,7 +153,7 @@ button:hover{
 {
     font-size: 25;
 }
-#comments, #questionlist, #answers  /*COLLECTION OF RESPECTIVE ITEMS*/
+#comments, #questionlist, #answers, #yourquestions  /*COLLECTION OF RESPECTIVE ITEMS*/
 {
     margin: 5px;
     margin-top: 15px;
@@ -216,7 +218,7 @@ button:hover{
     margin-left: 10px;
     margin-top: 20px;
 }
-.cmnt-button, .q-button, .a-button{             /*RESPECTIVE "POST" BUTTONS AFTER ANIMATIONS*/
+.cmnt-button, .q-button, .a-button, .edit-button{             /*RESPECTIVE "POST" BUTTONS AFTER ANIMATIONS+edit button*/
     background-color: cadetblue; 
     border: none;
     border-radius: 8px;
@@ -229,17 +231,39 @@ button:hover{
     display: inline-block;
     font-size: 20px;
 }
-.cmnt-button1, .q-button1, .a-button1 {         /*RESPECTIVE "POST" BUTTONS BEFORE ANIMATION*/
+.cmnt-button1, .q-button1, .a-button1, .edit-button1 {         /*RESPECTIVE "POST" BUTTONS BEFORE ANIMATION+edit button*/
     background-color: white; 
     color: black; 
     border: 2px solid cadetblue;
 }
 
-.cmnt-button1:hover, .q-button1:hover, .a-button1:hover {   /*RESPECTIVE "POST" BUTTON ANIMATION*/
-    background-color: cadetblue;
+.cmnt-button1:hover, .q-button1:hover, .a-button1:hover, .edit-button1:hover {   /*RESPECTIVE "POST" BUTTON ANIMATION
+                                                                                        +edit button animation*/
+    background-color: cadetblue;                                                   
     color: white;
 }
-
+.del-button{                    /*DELETE BUTTON*/
+    background-color: red; 
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 6px 19px;
+    margin: 0px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    display: inline-block;
+    font-size: 20px;
+}
+.del-button1{
+    background-color: white; 
+    color: black; 
+    border: 2px solid red;
+}
+.del-button1:hover{
+    background-color: red;                                                   
+    color: white;
+}
 /*===================END OF DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
 
 .btn-group .button {

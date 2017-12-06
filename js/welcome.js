@@ -342,7 +342,13 @@ function getYourIE(userid)
               docIdString = docIdString+'<div id ="ind-card">'+
                 '<span id="company-name">'+doc.data().companyName+'</span>'+
                 '<span id="user-name">'+doc.data().username+'</span>'+
-'</div><button id="editIE" onclick=editPost("' +doc.id+ '")>EDIT</button><button onclick=deletePost("'+doc.id+'")>DELETE</button><br>'  
+                '</div>'+
+                '<table align="center" style="margin-top:5px;margin-bottom:20px">'+
+                    '<tr>'+
+                        '<td align="right"><button id="editIE" class="edit-button edit-button1" onclick=editPost("'+doc.id+'")>Edit</button></td>'+
+                        '<td align="left"><button class="del-button del-button1" onclick=deletePost("'+doc.id+'")>Delete</button></td>'+
+                    '</tr>'+
+                '</table>';
         });
        
         document.getElementById("yourcards").innerHTML = docIdString;
@@ -360,8 +366,8 @@ function getYourQuestions(userid)
             
             alert(doc.data().question);
             docIdString+='<input type="text" id="'+doc.id+'" value="'+doc.data().question+'" disabled>'+
-            '<button id="edit" onclick=editQuestion("'+doc.id+'")>EDIT</button>'+
-            '<button onclick=deleteQuestion("'+doc.id+'")>DELETE</button>';
+            '<button id="edit" class="edit-button edit-button1" onclick=editQuestion("'+doc.id+'")>Edit</button>'+
+            '<button class="del-button del-button1" onclick=deleteQuestion("'+doc.id+'")>Delete</button>';
         });
        
         document.getElementById("yourquestions").innerHTML = docIdString;
