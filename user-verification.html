@@ -37,10 +37,10 @@
         queryString = continueURL;
 	  queryString = queryString.split('?');
         continueURL = queryString[1];
-      var parsedURL = getQueryString(continueURL);
-        var email = parsedURL['email'];
-        var uname = parsedURL['username'];
-        var uid = parsedURL['uid'];
+      parsedURL = getQueryString(continueURL);
+      email = parsedURL['email'];
+      uname = parsedURL['username'];
+      uid = parsedURL['uid'];
         alert("email="+email+"||uname="+uname+"||uid="+uid);
       // Configure the Firebase SDK.
       // This is the minimum configuration required for the API to be used.
