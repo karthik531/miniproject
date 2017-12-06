@@ -45,19 +45,32 @@ function manageSignup()
     {
         document.getElementById("ERROR").innerHTML = "";
         var promise = firebase.auth().createUserWithEmailAndPassword(email,password); 
-        promise.catch(function(error){
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("form").style.display = "block";
-            console.error("ERROR CREATING USER");
-        });
-        firebase.auth().onAuthStateChanged(function(user)
-	    {
-            if(user)
+            promise.catch(function(error)
             {
-                user_ref = user;
-                insertInfoAndProceed();
-            }
-        });
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("form").style.display = "block";
+                console.error("ERROR CREATING USER");
+            });
+            firebase.auth().onAuthStateChanged(function(user)
+            {
+                if(user)
+                {
+                    user_ref = user;
+                    //insertInfoAndProceed();
+
+                    var actionCodeSettings = {
+                        url: 'https://localhost/user-verification.html?email='+email+'&username='+name+'&uid='+user.uid
+                    }
+
+                    firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
+                      .then(function() {
+                        alert("Verification email sent");
+                      })
+                      .catch(function(error) {
+                        alert("Error occurred");
+                      });
+                }
+            });
     }
 }
 function insertInfoAndProceed()
