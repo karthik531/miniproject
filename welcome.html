@@ -21,14 +21,15 @@
                 </div>
                 
                 <!--p id="ued"></p-->
-                <button class="button" id="1" onclick="getInterviewExperiences()">Interview Experience</button>
-                <button class="button" id="2" onclick="insertEditor()">Add Experience</button>
-                <button class="button" id="3" onclick="getYourSubmissions()">Your Submissions</button>
-                <button class="button" id="4" >Tips</button>
-                <button class="button" id="5" onclick = "getQuestions()">Q/A</button>
-                <button class="button" id="6" >Company Preparation</button>
-                <button class="button" id="7" >About</button>
-                <button id="logout" class="button" id="8" onclick="handleSignOut()" >SignOut</button>
+                <button class="button" onclick="getInterviewExperiences()">Interview Experience</button>
+                <button class="button" onclick="insertEditor()">Add Experience</button>
+                <button class="button" onclick="getYourSubmissions()">Your Submissions</button>
+                <button class="button" >Tips</button>
+                <button class="button" onclick = "getQuestions()">Q/A</button>
+                <button class="button" >Company Preparation</button>
+                <button class="button" >About</button>
+                <button class="button" onclick="getSettings()">Settings</button>
+                <button id="logout" class="button" onclick="handleSignOut()" >SignOut</button>
                 
             </div>
             
@@ -38,6 +39,44 @@
                 <!--div id="editor"></div-->
                 <div id="cards"  style="display:none">  </div>
                 
+                <div id="settings" style="display:none">
+                    <table>
+                        <tr>
+                            <td id="email-setting">Email</td>
+                            <td><input type="text" id="email-setting-field" disabled></td>
+                        </tr>
+                        <tr>
+                            <td id="uname-setting">Name</td>
+                            <td><input type="text" id="uname-setting-field" onblur="" disabled></td>
+                            <td><button id="uname-setting-toggle" onclick="editUname()">Edit</button></td>
+                        </tr>
+                        
+                        <tr>
+                            <td><button id="password-setting-toggle" onclick="changePasswordToggle()">Change Password</button></td>
+                            <td><button id="delete-account" onclick="deleteAccount()">Delete Account</button></td>
+                        </tr>
+                        
+                        <tr id="reauth-email-setting-row" style="display:none">
+                            <td id="reauth-email-setting">Email</td>
+                            <td><input type="text" id="reauth-email-setting-field" ></td>
+                        </tr>
+                        <tr id="reauth-old-password-setting-row" style="display:none">
+                            <td id="reauth-old-password">Old Password</td>
+                            <td><input type="password" id="reauth-old-password-field" ></td>
+                        </tr>
+                        <tr id="reauth-button-row" style="display:none">
+                            <td colspan="2"><button id="reauthenticate" >Reauthenticate</button></td>
+                        </tr>
+                        <tr id="reauth-new-password-setting-row"style="display:none">
+                            <td id="reauth-new-password">New Password</td>
+                            <td><input type="password" id="reauth-new-password-field"></td>
+                        </tr>
+                        <tr id="password-change-button-row" style="display:none">
+                            <td><button id="password-change" onclick="changePassword()">Update Password</button></td>
+                        </tr>
+                    </table>
+                </div>
+            
                 <div id="your-submissions" style="display:none">
                     <div id="yourcards" ></div>
                     <div id="yourquestions" ></div>

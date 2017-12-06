@@ -416,6 +416,45 @@ function editQuestion(doc_id)
     }
 
 }
+function editUname()
+{
+    var isDisabled  = document.getElementById("uname-setting-field").disabled;
+    if(isDisabled){
+       
+       document.getElementById("uname-setting-field").disabled = false;
+       document.getElementById("uname-setting-toggle").innerHTML = "Save";
+       orig_name = document.getElementById("uname-setting-field").value;
+   }
+   else
+   {
+       var new_name = document.getElementById("uname-setting-field").value;
+       if(new_name!=orig_name)
+       {
+           firebase.firestore().collection("users").where("uid","==",user_ref.uid).get().then(function(querySnapshot)
+           {
+                querySnapshot.forEach(function(doc)
+                {
+                    if(doc && doc.exists)
+                    {
+
+                            firebase.firestore().collection("users").doc(doc.id).update({uname:new_name}).then(function()
+                            {
+                                localStorage.setItem(user_ref.email,new_name);
+                                document.getElementById("und").innerHTML = new_name;
+                                document.getElementById("uname-setting-field").disabled = true;
+                                document.getElementById("uname-setting-toggle").innerHTML = "Edit";
+
+                            }).catch(function(){
+                                alert("ERROR !! USERNAME NOT UPDATED")
+                            });    
+
+                    }    
+                });
+           });
+       }
+        
+    }
+}
 
 function changeCloseImage()
 {
@@ -538,5 +577,104 @@ function insertPost()
             
     }
 }
+function changePassword()
+{
+    var new_password  = document.getElementById("reauth-new-password-field").value;
+    var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
+    if(new_password.trim()=="" || !passexp.test(new_password))
+    {
+          alert("Should contain at least one uppercase letter, one lowercase letter and a number. Minimum of 8 characters.");
+    }
+    else{
+        user_ref.updatePassword(new_password).then(function()
+        {
+           alert("YOUR PASSWORD IS UPDATED SUCCESSFULLY");
+           handleSignOut();
+        }).catch(function(error)
+        {
+            alert("error message "+error.message);
+        });
+    }
+}
+function reauthenticate(mode)
+{
+    
+    var reauth_email = document.getElementById("reauth-email-setting-field").value;
+    var reauth_old_password = document.getElementById("reauth-old-password-field").value;
+    var credential = firebase.auth.EmailAuthProvider.credential(reauth_email,reauth_old_password);
+    
+    user_ref.reauthenticateWithCredential(credential).then(function()
+    {
+        if(mode=="CHANGE_PASSWORD")
+        {
+            document.getElementById("password-change-button-row").style.display = "block";
+            document.getElementById("reauth-new-password-setting-row").style.display = "block";
+        }
+        else if(mode=="DELETE_USER")
+        {
+            user_ref.delete().then(function(){
+               alert("accout successfully deleted");
+               handleSignOut();
+            }).catch(function(error){
+               alert("error message "+error.message);
+            }); 
+        }
+    }).catch(function(error){
+        alert("invalid user!! Please check your credentials");
+        
+    });
+    
+}
+function reauthenticateChangePassword(){
+    
+    reauthenticate("CHANGE_PASSWORD");
+}
+function reauthenticateDelete(){
+    reauthenticate("DELETE_USER");
+    /*alert("INRDU");
+    if(reauthenticate())
+    {
+        alert("IIDA");
+            user_ref.delete().then(function(){
+               alert("accout successfully deleted");
+               handleSignOut();
+            }).catch(function(error){
+               alert("error message "+error.message);
+            });
+    }
+    else
+    {
+        alert("reauthentication failed");
+    }*/
+}
 
- 
+function retrieveProfile()
+{
+   document.getElementById("uname-setting-field").value = document.getElementById("und").innerHTML;
+   document.getElementById("email-setting-field").value = document.getElementById("ued").innerHTML;
+}
+
+function getSettings()
+{
+    var x = document.getElementById("settings").style.display;
+    displaySupporter(x);
+    document.getElementById("settings").style.display = "block";
+    presentId = "settings";
+    retrieveProfile();
+}
+
+function changePasswordToggle()
+{
+    document.getElementById("reauth-email-setting-row").style.display = "block";
+    document.getElementById("reauth-old-password-setting-row").style.display = "block";
+    document.getElementById("reauth-button-row").style.display = "block";
+    document.getElementById("reauthenticate").addEventListener('click',reauthenticateChangePassword);
+}
+
+function deleteAccount()
+{
+    document.getElementById("reauth-email-setting-row").style.display = "block";
+    document.getElementById("reauth-old-password-setting-row").style.display = "block";
+    document.getElementById("reauth-button-row").style.display = "block";
+    document.getElementById("reauthenticate").addEventListener('click',reauthenticateDelete);
+}
