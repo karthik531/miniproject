@@ -93,10 +93,6 @@ function insertQuestion()
 
 function getQuestions()
 {
-   // document.getElementById("editor").style.display = "none";
-    //document.getElementById("cards").style.display = "none";
-   // document.getElementById("loader").style.display = "block";
-    //presentId = "loader"
     var x = document.getElementById("loader").style.display;
     displaySupporter(x);
     document.getElementById("loader").style.display = "block";
@@ -116,7 +112,6 @@ function getQuestions()
                 '</div>'
             });
         
-            //document.getElementById("loader").style.display = "none";
             var x = document.getElementById("questions").style.display;
             displaySupporter(x);
             document.getElementById("questions").style.display = "block";
@@ -148,9 +143,7 @@ function getQuestionContent(docId)
             
         }
          getAllAnswers(); 
-    });
-   
-   
+    });  
 }
 
 function getAllAnswers()
@@ -223,8 +216,6 @@ function sendMail(toEmail,answer,rusername,susername,qstn)
 }
 function getInterviewExperiences()
 {
-    //document.getElementById("editor").style.display = "none";
-    //document.getElementById("loader").style.display = "block";
     var x = document.getElementById("loader").style.display;
     displaySupporter(x);
     document.getElementById("loader").style.display = "block";
@@ -244,7 +235,6 @@ function getInterviewExperiences()
                 '</div><br>'
             });
     
-            //document.getElementById("loader").style.display = "none";
             var x = document.getElementById("cards").style.display;
             displaySupporter(x);
             document.getElementById("cards").style.display = "block";
@@ -633,8 +623,6 @@ function reauthenticate(mode)
     {
         if(mode=="CHANGE_PASSWORD")
         {
-            /*document.getElementById("password-change-button-row").style.display = "block";
-            document.getElementById("reauth-new-password-setting-row").style.display = "block";*/
             document.getElementById("new-password-block").style.display = "block";
         }
         else if(mode=="DELETE_USER")
