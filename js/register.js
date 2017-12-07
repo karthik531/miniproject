@@ -59,15 +59,15 @@ function manageSignup()
                     //insertInfoAndProceed();
 
                     var actionCodeSettings = {
-                        url: 'https://localhost/user-verification.html?email='+email+'&username='+name+'&uid='+user.uid
+                        url: 'https://localhost/miniproject/user-verification.html?email='+email+'&username='+name+'&uid='+user.uid
                     }
 
                     firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
                       .then(function() {
-                        alert("Verification email sent");
+                        alert("Verification email sent!! Please verify email and login");
                       })
                       .catch(function(error) {
-                        alert("Error occurred");
+                        alert("Error occurred!! verification cant be sent to you");
                       });
                 }
             });
