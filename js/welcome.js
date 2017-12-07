@@ -85,7 +85,7 @@ function insertQuestion()
         return;
     }
     var user_name = document.getElementById("und").innerHTML;
-    alert(user_ref.uid)
+    //alert(user_ref.uid)
     var questionData = {question: question,uid: user_ref.uid,username : user_name ,views: 0};
     var promise = firebase.firestore().collection("questions").doc().set(questionData);
     
@@ -193,7 +193,7 @@ var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  n
                         var rusername = doc.data().uname;                       
                         var message = answer;
                         var qstn =  document.getElementById("question").innerHTML;
-                        alert(user_name);
+                        //alert(user_name);
                         sendMail(toEmail,answer,rusername,user_name,qstn);
                     });
                 });
@@ -366,8 +366,7 @@ function getYourQuestions(userid)
         var docIdString = "";
         querySnapshot.forEach(function(doc) 
         {
-            
-            alert(doc.data().question);
+            //alert(doc.data().question);
             docIdString+=
             '<table style="margin-left:5%">'+
                 '<tr>'+
@@ -641,21 +640,6 @@ function reauthenticateChangePassword(){
 }
 function reauthenticateDelete(){
     reauthenticate("DELETE_USER");
-    /*alert("INRDU");
-    if(reauthenticate())
-    {
-        alert("IIDA");
-            user_ref.delete().then(function(){
-               alert("accout successfully deleted");
-               handleSignOut();
-            }).catch(function(error){
-               alert("error message "+error.message);
-            });
-    }
-    else
-    {
-        alert("reauthentication failed");
-    }*/
 }
 
 function retrieveProfile()

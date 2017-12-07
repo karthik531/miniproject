@@ -32,18 +32,20 @@
       searchAndReplace("%3D", "=");
       searchAndReplace("%40", "@");
       searchAndReplace("%26", "&");
-                alert(continueURL);
+               // alert(continueURL);
         
-        queryString = continueURL;
+      queryString = continueURL;
 	  queryString = queryString.split('?');
+
         continueURL = queryString[1];
       parsedURL = getQueryString(continueURL);
       email = parsedURL['email'];
       uname = parsedURL['username'];
       uid = parsedURL['uid'];
-        alert("email="+email+"||uname="+uname+"||uid="+uid);
+        //alert("email="+email+"||uname="+uname+"||uid="+uid);
       // Configure the Firebase SDK.
       // This is the minimum configuration required for the API to be used.
+
       var config = 
       {
         apiKey: apiKey,
@@ -66,19 +68,11 @@
           // Error: invalid mode.
       }
     }, false);
+        
     function handleVerifyEmail(auth, actionCode) {
       // Try to apply the email verification code.
       auth.applyActionCode(actionCode).then(function(resp) 
 	  {
-        /*alert("email "+firebase.auth().currentUser.email+" verified "+firebase.auth().currentUser.emailVerified);
-		firebase.auth().currentUser.emailVerified = true;
-        alert("new verification="+firebase.auth().currentUser.emailVerified);*/
-       /* alert(firebase.auth().currentUser.emailVerified);
-        var db = firebase.firestore().collection("users").get().then(function(doc){
-           doc.forEach(function(ind_doc){
-               alert(ind_doc.data().uid);
-           }) ;
-        });*/
         firebase.firestore().collection("users").doc().set({email:email,uid:uid,uname:uname,verified:true}).then(function(){
               
               document.getElementById("result").style.display = "block";
@@ -87,7 +81,7 @@
       }).catch(function(error) {
         // Code is invalid or expired. Ask the user to verify their email address
         // again.
-          alert(error.code+"/"+error.message+"/"+error.name);
+          //alert(error.code+"/"+error.message+"/"+error.name);
       });
     }
 
@@ -101,7 +95,7 @@
             for ( i = 0, l = queries.length; i < l; i++ ) {
                 temp = queries[i].split('=');
                 params[temp[0]] = temp[1];
-                alert(temp[0]+"||"+temp[1]);
+                //alert(temp[0]+"||"+temp[1]);
             }
             return params;
     }
