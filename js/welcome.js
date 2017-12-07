@@ -640,7 +640,7 @@ function reauthenticate(mode)
         else if(mode=="DELETE_USER")
         {
             user_ref.delete().then(function(){
-               alert("accout successfully deleted");
+               alert("account successfully deleted");
                handleSignOut();
             }).catch(function(error){
                alert("error message "+error.message);
@@ -682,17 +682,12 @@ function getSettings()
 
 function changePasswordToggle()
 {
-    /*document.getElementById("reauth-email-setting-row").style.display = "block";
-    document.getElementById("reauth-old-password-setting-row").style.display = "block";
-    document.getElementById("reauth-button-row").style.display = "block";*/
     document.getElementById("reauth-setting-block").style.display = "block";
     document.getElementById("reauthenticate").addEventListener('click',reauthenticateChangePassword);
 }
 
 function deleteAccount()
 {
-    document.getElementById("reauth-email-setting-row").style.display = "block";
-    document.getElementById("reauth-old-password-setting-row").style.display = "block";
-    document.getElementById("reauth-button-row").style.display = "block";
+    document.getElementById("reauth-setting-block").style.display = "block";
     document.getElementById("reauthenticate").addEventListener('click',reauthenticateDelete);
 }
