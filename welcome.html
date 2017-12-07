@@ -43,38 +43,44 @@
                     <table>
                         <tr>
                             <td id="email-setting">Email</td>
-                            <td><input type="text" id="email-setting-field" disabled></td>
+                            <td><input type="text" class="textfield" id="email-setting-field" disabled></td>
                         </tr>
                         <tr>
                             <td id="uname-setting">Name</td>
-                            <td><input type="text" id="uname-setting-field" onblur="" disabled></td>
-                            <td><button id="uname-setting-toggle" onclick="editUname()">Edit</button></td>
+                            <td><input type="text" class="textfield" id="uname-setting-field" onblur="" disabled></td>
+                            <td><button id="uname-setting-toggle" class="set-b set-b1" onclick="editUname()">Edit</button></td>
                         </tr>
                         
                         <tr>
-                            <td><button id="password-setting-toggle" onclick="changePasswordToggle()">Change Password</button></td>
-                            <td><button id="delete-account" onclick="deleteAccount()">Delete Account</button></td>
-                        </tr>
-                        
-                        <tr id="reauth-email-setting-row" style="display:none">
-                            <td id="reauth-email-setting">Email</td>
-                            <td><input type="text" id="reauth-email-setting-field" ></td>
-                        </tr>
-                        <tr id="reauth-old-password-setting-row" style="display:none">
-                            <td id="reauth-old-password">Old Password</td>
-                            <td><input type="password" id="reauth-old-password-field" ></td>
-                        </tr>
-                        <tr id="reauth-button-row" style="display:none">
-                            <td colspan="2"><button id="reauthenticate" >Reauthenticate</button></td>
-                        </tr>
-                        <tr id="reauth-new-password-setting-row"style="display:none">
-                            <td id="reauth-new-password">New Password</td>
-                            <td><input type="password" id="reauth-new-password-field"></td>
-                        </tr>
-                        <tr id="password-change-button-row" style="display:none">
-                            <td><button id="password-change" onclick="changePassword()">Update Password</button></td>
+                            <td colspan="2"><button id="password-setting-toggle" class="set-b set-b1" onclick="changePasswordToggle()">Change Password</button>
+                            <button id="delete-account" class="del-button del-button1" onclick="deleteAccount()">Delete Account</button></td>
                         </tr>
                     </table>
+                    <br>
+                    <table id="reauth-setting-block" style="display: none">
+                        <tr>
+                            <td id="reauth-email-setting">Email</td>
+                            <td><input type="text" class="textfield" id="reauth-email-setting-field" ></td>
+                        </tr>
+                        <tr>
+                            <td id="reauth-old-password">Old Password</td>
+                            <td><input type="password" class="textfield" id="reauth-old-password-field" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button id="reauthenticate" class="set-b set-b1">Reauthenticate</button></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="new-password-block" style="display: none">
+                        <tr>
+                            <td id="reauth-new-password">New Password</td>
+                            <td><input type="password" class="textfield" id="reauth-new-password-field"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button id="password-change" class="set-b set-b1" onclick="changePassword()">Update Password</button></td>
+                        </tr>
+                    </table>
+                    <br>
                 </div>
             
                 <div id="your-submissions" style="display:none">

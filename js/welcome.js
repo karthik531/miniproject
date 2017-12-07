@@ -97,6 +97,11 @@ function getQuestions()
     //document.getElementById("cards").style.display = "none";
    // document.getElementById("loader").style.display = "block";
     //presentId = "loader"
+    var x = document.getElementById("loader").style.display;
+    displaySupporter(x);
+    document.getElementById("loader").style.display = "block";
+    presentId = "loader";
+    
     var question_path = firebase.firestore().collection("questions");
    
     question_path.onSnapshot(function(querySnapshot) 
@@ -220,6 +225,11 @@ function getInterviewExperiences()
 {
     //document.getElementById("editor").style.display = "none";
     //document.getElementById("loader").style.display = "block";
+    var x = document.getElementById("loader").style.display;
+    displaySupporter(x);
+    document.getElementById("loader").style.display = "block";
+    presentId = "loader";
+    
 	path = firebase.firestore().collection("ie");
    
     path.onSnapshot(function(querySnapshot) 
@@ -323,6 +333,10 @@ function getAllComments()
 
 function getYourSubmissions()
 {
+    var x = document.getElementById("loader").style.display;
+    displaySupporter(x);
+    document.getElementById("loader").style.display = "block";
+    presentId = "loader";
     
     var x = document.getElementById("your-submissions").style.display;
     displaySupporter(x);
@@ -461,7 +475,10 @@ function editUname()
                 });
            });
        }
-        
+       else{
+           document.getElementById("uname-setting-field").disabled = true;
+           document.getElementById("uname-setting-toggle").innerHTML = "Edit";
+       }
     }
 }
 
@@ -616,8 +633,9 @@ function reauthenticate(mode)
     {
         if(mode=="CHANGE_PASSWORD")
         {
-            document.getElementById("password-change-button-row").style.display = "block";
-            document.getElementById("reauth-new-password-setting-row").style.display = "block";
+            /*document.getElementById("password-change-button-row").style.display = "block";
+            document.getElementById("reauth-new-password-setting-row").style.display = "block";*/
+            document.getElementById("new-password-block").style.display = "block";
         }
         else if(mode=="DELETE_USER")
         {
@@ -650,6 +668,11 @@ function retrieveProfile()
 
 function getSettings()
 {
+    var x = document.getElementById("loader").style.display;
+    displaySupporter(x);
+    document.getElementById("loader").style.display = "block";
+    presentId = "loader";
+    
     var x = document.getElementById("settings").style.display;
     displaySupporter(x);
     document.getElementById("settings").style.display = "block";
@@ -659,9 +682,10 @@ function getSettings()
 
 function changePasswordToggle()
 {
-    document.getElementById("reauth-email-setting-row").style.display = "block";
+    /*document.getElementById("reauth-email-setting-row").style.display = "block";
     document.getElementById("reauth-old-password-setting-row").style.display = "block";
-    document.getElementById("reauth-button-row").style.display = "block";
+    document.getElementById("reauth-button-row").style.display = "block";*/
+    document.getElementById("reauth-setting-block").style.display = "block";
     document.getElementById("reauthenticate").addEventListener('click',reauthenticateChangePassword);
 }
 
