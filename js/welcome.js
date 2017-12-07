@@ -339,14 +339,17 @@ function getYourIE(userid)
         var docIdString = "";
         querySnapshot.forEach(function(doc) 
         {
-              docIdString = docIdString+'<div id ="ind-card">'+
-                '<span id="company-name">'+doc.data().companyName+'</span>'+
-                '<span id="user-name">'+doc.data().username+'</span>'+
+              docIdString = docIdString+
+                '<div id ="ind-card" style="width:70%;float:left;margin-bottom:3%;margin-right:10px">'+
+                    '<span id="company-name">'+doc.data().companyName+'</span>'+
+                    '<span id="user-name">'+doc.data().username+'</span>'+
                 '</div>'+
-                '<table align="center" style="margin-top:5px;margin-bottom:20px">'+
+                '<table align="center" style="margin-bottom:4%;margin-left:0px">'+
                     '<tr>'+
-                        '<td align="right"><button id="editIE" class="edit-button edit-button1" onclick=editPost("'+doc.id+'")>Edit</button></td>'+
-                        '<td align="left"><button class="del-button del-button1" onclick=deletePost("'+doc.id+'")>Delete</button></td>'+
+                        '<td><button id="editIE" class="edit-button edit-button1" onclick=editPost("'+doc.id+'")>Edit</button></td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td><button class="del-button del-button1" onclick=deletePost("'+doc.id+'")>Delete</button></td>'+
                     '</tr>'+
                 '</table>';
         });
@@ -365,9 +368,15 @@ function getYourQuestions(userid)
         {
             
             alert(doc.data().question);
-            docIdString+='<input type="text" id="'+doc.id+'" value="'+doc.data().question+'" disabled>'+
-            '<button id="edit" class="edit-button edit-button1" onclick=editQuestion("'+doc.id+'")>Edit</button>'+
-            '<button class="del-button del-button1" onclick=deleteQuestion("'+doc.id+'")>Delete</button>';
+            docIdString+=
+            '<table style="margin-left:5%">'+
+                '<tr>'+
+                    '<td><input type="text" class="textfield" id="'+doc.id+'" value="'+doc.data().question+'" disabled></td>'+
+                    '<td><button id="edit" class="edit-button edit-button1" onclick=editQuestion("'+doc.id+'")>Edit</button></td>'+
+                    '<td>'+
+                    '<button class="del-button del-button1" onclick=deleteQuestion("'+doc.id+'")>Delete</button></td>'+
+                '</tr>'+
+            '</table>';
         });
        
         document.getElementById("yourquestions").innerHTML = docIdString;
@@ -400,7 +409,7 @@ function editQuestion(doc_id)
    if(isDisabled){
        
        document.getElementById(doc_id).disabled = false;
-       document.getElementById("edit").innerHTML = "save";
+       document.getElementById("edit").innerHTML = "Save";
        orig_question = document.getElementById(doc_id).value;
    }
    else{
@@ -413,6 +422,7 @@ function editQuestion(doc_id)
             });
         }   
         document.getElementById(doc_id).disabled = true;
+        document.getElementById("edit").innerHTML = "Edit";
     }
 
 }

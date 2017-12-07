@@ -189,7 +189,7 @@ button:hover{
     font-size: 16px;
     padding: 5px;
 }
-#comment-heading, #question-heading, #answer-heading    /*RESPECTIVE HEADINGS*/
+#comment-heading, #question-heading, #answer-heading, #your-post-heading, #your-question-heading    /*RESPECTIVE HEADINGS*/
 {
     font-family: sans-serif;
     font-size: 20px;
@@ -211,6 +211,15 @@ button:hover{
     height: 10%;
     border-radius: 8px;
     display: inline-block;
+}
+.textfield{
+    width: 350px;
+    height: 45px;
+    padding: 5px;
+    margin: 5px;
+    font-size: 20px;
+    color: darkslategrey;
+    font-family: Arial,sans-serif;
 }
 .text-entry
 {
@@ -348,3 +357,5 @@ button:hover{
   display: none;
   text-align: center;
 }
+/*kurushetra111@gmail.com
+Kuru@123*/
