@@ -36,13 +36,16 @@
         
       queryString = continueURL;
 	  queryString = queryString.split('?');
-      continueURL = queryString[1];
-        
-        var parsedURL = getQueryString(continueURL);
-         email = parsedURL['email'];
-         uname = parsedURL['username'];
-         uid = parsedURL['uid'];
-         //alert("email="+email+"||uname="+uname+"||uid="+uid);
+
+        continueURL = queryString[1];
+      parsedURL = getQueryString(continueURL);
+      email = parsedURL['email'];
+      uname = parsedURL['username'];
+      uid = parsedURL['uid'];
+        //alert("email="+email+"||uname="+uname+"||uid="+uid);
+      // Configure the Firebase SDK.
+      // This is the minimum configuration required for the API to be used.
+
       var config = 
       {
         apiKey: apiKey,
@@ -78,7 +81,7 @@
       }).catch(function(error) {
         // Code is invalid or expired. Ask the user to verify their email address
         // again.
-          alert(error.code+"/"+error.message+"/"+error.name);
+          //alert(error.code+"/"+error.message+"/"+error.name);
       });
     }
 
