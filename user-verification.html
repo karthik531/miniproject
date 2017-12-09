@@ -1,7 +1,24 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="css/loginStyle.css">
+</head>
 <body>
     <div id="result" style="display:none">
         
     <h3><a id="continueURL" href="">CLICK HERE TO REDIRECT TO LOGIN PAGE</a></h3>
+    </div>
+    
+    <div id="reset" style="display: none">
+        <table class="table" align="center">
+            <tr>
+                <td><input type="password" class="textfield" id="newpass" placeholder="Enter new password here"></td>
+            </tr>
+            <tr>
+                <td><input type="password" class="textfield" id="confirmpass" placeholder="Re-enter new password"></td>
+            </tr>
+            <tr>
+                <td><button id="reset-pass" class="button button1">Update Password</button></td>
+            </tr>
+        </table>
     </div>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
@@ -21,31 +38,33 @@
       var mode = parsedQueryString['mode'];
        
       // Get the one-time code from the query parameter.
-      var actionCode = parsedQueryString['oobCode'];
+      actionCode = parsedQueryString['oobCode'];
        
       // (Optional) Get the API key from the query parameter.
-      var apiKey = parsedQueryString['apiKey'];
-      continueURL = parsedQueryString['continueUrl'];
-      searchAndReplace("%3F", "?");
-      searchAndReplace("%3A", ":");
-      searchAndReplace("%2F", "/");
-      searchAndReplace("%3D", "=");
-      searchAndReplace("%40", "@");
-      searchAndReplace("%26", "&");
-               // alert(continueURL);
-        
-      queryString = continueURL;
-	  queryString = queryString.split('?');
+      apiKey = parsedQueryString['apiKey'];
+        if(mode == 'verifyEmail')
+            {
+              continueURL = parsedQueryString['continueUrl'];
+              searchAndReplace("%3F", "?");
+              searchAndReplace("%3A", ":");
+              searchAndReplace("%2F", "/");
+              searchAndReplace("%3D", "=");
+              searchAndReplace("%40", "@");
+              searchAndReplace("%26", "&");
+                       // alert(continueURL);
 
-        continueURL = queryString[1];
-      parsedURL = getQueryString(continueURL);
-      email = parsedURL['email'];
-      uname = parsedURL['username'];
-      uid = parsedURL['uid'];
-        //alert("email="+email+"||uname="+uname+"||uid="+uid);
-      // Configure the Firebase SDK.
-      // This is the minimum configuration required for the API to be used.
+              queryString = continueURL;
+              queryString = queryString.split('?');
 
+                continueURL = queryString[1];
+              parsedURL = getQueryString(continueURL);
+              email = parsedURL['email'];
+              uname = parsedURL['username'];
+              uid = parsedURL['uid'];
+                //alert("email="+email+"||uname="+uname+"||uid="+uid);
+              // Configure the Firebase SDK.
+              // This is the minimum configuration required for the API to be used.
+            }
       var config = 
       {
         apiKey: apiKey,
@@ -55,14 +74,18 @@
 	    storageBucket: "vishnu-a7bac.appspot.com",
 	    messagingSenderId: "43664081987"
       };
-      var app = firebase.initializeApp(config);
-      var auth = app.auth();
+      app = firebase.initializeApp(config);
+      auth = app.auth();
 
       // Handle the user management action.
       switch (mode) {
         case 'verifyEmail':
           // Display email verification handler and UI.
           handleVerifyEmail(auth, actionCode);
+          break;
+        case 'resetPassword':
+          // Display reset password handler and UI.
+          handleResetPassword(auth, actionCode);
           break;
         default:
           // Error: invalid mode.
@@ -85,6 +108,54 @@
       });
     }
 
+    function handleResetPassword(auth, actionCode)
+    {
+        var accountEmail;
+        var flag = 0;
+      // Verify the password reset code is valid.
+      auth.verifyPasswordResetCode(actionCode).then(function(email) {
+        var accountEmail = email;
+
+        // TODO: Show the reset screen with the user's email and ask the user for
+        // the new password.
+          document.getElementById("reset").style.display="block";
+          document.getElementById("reset-pass").addEventListener('click', updatePassword);
+          
+      }).catch(function(error) {
+        // Invalid or expired action code. Ask user to try to reset the password
+        // again.
+          alert("FAILED");
+      });
+    }
+        
+    function updatePassword()
+    {
+        var newpass = document.getElementById("newpass").value.trim();
+          var confirmpass = document.getElementById("confirmpass").value.trim();
+          flag = 0;
+          if(newpass != confirmpass)
+          {
+              alert("Please enter same password in both the fields");
+              flag = 1;
+          }
+
+          if(flag == 0)
+              {
+                  // Save the new password.
+                    auth.confirmPasswordReset(actionCode, newpass).then(function(resp) {
+                      // Password reset has been confirmed and new password updated.
+                        alert("Password updated successfully");
+                        document.getElementById("result").style.display = "block";
+                        document.getElementById("reset").style.display = "none";
+                        document.getElementById("continueURL").href = "index.html";
+
+                    }).catch(function(error) {
+                      // Error occurred during confirmation.
+                        alert("failed");
+                    });
+              }
+    }
+        
 	function getQueryString( queryString ) 
 	{
 		

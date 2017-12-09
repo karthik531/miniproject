@@ -122,6 +122,11 @@ function getQuestions()
 
 function getQuestionContent(docId)
 {
+    var x = document.getElementById("loader").style.display;
+    displaySupporter(x);
+    document.getElementById("loader").style.display = "block";
+    presentId = "loader";
+    
     var questionpath = firebase.firestore().collection("questions").doc(docId);
     answerpath = questionpath.collection("comments");
     
@@ -132,9 +137,15 @@ function getQuestionContent(docId)
             var count = doc.data().views+1;
             questionpath.update({views:count}).then(function()
             {
+                /*document.getElementById("questions").style.display = "none";
+                document.getElementById("questioncontent").style.display = "block";
+                presentId = "questioncontent";*/
                 document.getElementById("questions").style.display = "none";
+                var x = document.getElementById("questioncontent").style.display;
+                displaySupporter(x);
                 document.getElementById("questioncontent").style.display = "block";
                 presentId = "questioncontent";
+                
                 document.getElementById("question").innerHTML = doc.data().question;
                 
                 mail_uid = doc.data().uid;  //used for email notification
@@ -161,6 +172,11 @@ function getAllAnswers()
         
         document.getElementById("answers").innerHTML = answerString;
     });
+    
+    /*var x = document.getElementById("questioncontent").style.display;
+    displaySupporter(x);
+    document.getElementById("questioncontent").style.display = "block";
+    presentId = "questioncontent";*/
 }
 
 function insertAnswer()
@@ -260,6 +276,11 @@ function gotoQuestions()
 
 function getAllContent(docId)
 {
+    var x = document.getElementById("loader").style.display;
+    displaySupporter(x);
+    document.getElementById("loader").style.display = "block";
+    presentId = "loader";
+    
     document.getElementById("description").innerHTML = "";
     document.getElementById("comments").innerHTML = "";
     
@@ -474,14 +495,14 @@ function editUname()
 
 function changeCloseImage()
 {
-    document.getElementById("exp-close-image").src = "backbutton-final.jpg";
-    document.getElementById("question-close-image").src = "backbutton-final.jpg";
+    document.getElementById("exp-close-image").src = "images/backbutton-final.jpg";
+    document.getElementById("question-close-image").src = "images/backbutton-final.jpg";
 }
 
 function revertCloseImage()
 {
-    document.getElementById("exp-close-image").src = "backbutton-init.png";
-    document.getElementById("question-close-image").src = "backbutton-init.png";
+    document.getElementById("exp-close-image").src = "images/backbutton-init.png";
+    document.getElementById("question-close-image").src = "images/backbutton-init.png";
 }
 
 function deleteSubmissions(doc_id,collection,sub_collection)
@@ -678,4 +699,16 @@ function deleteAccount()
 {
     document.getElementById("reauth-setting-block").style.display = "block";
     document.getElementById("reauthenticate").addEventListener('click',reauthenticateDelete);
+}
+function getAbout()
+{
+    var x = document.getElementById("loader").style.display;
+    displaySupporter(x);
+    document.getElementById("loader").style.display = "block";
+    presentId = "loader";
+    
+    var x = document.getElementById("about").style.display;
+    displaySupporter(x);
+    document.getElementById("about").style.display = "block";
+    presentId = "about";
 }

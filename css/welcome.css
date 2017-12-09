@@ -313,13 +313,54 @@ button:hover{
 .btn-group .button:hover {
     background-color: mediumaquamarine;
 }
-
+.btn-group .button:focus{
+        background-color: darkcyan;
+}
 /*p{
     text-align: center;
     font-family: monospace;
     font-size: 20;
     color: white;
 }*/
+
+
+/*====================ABOUT PAGE CSS=======================*/
+
+#about
+{
+    font-family: cursive;
+    background-color: white;
+    color: black;
+    font-size: 20;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#about-text
+{
+    text-align: left;
+}
+#image1
+{
+    float: left;
+    height: 100%;
+    width: 20%;
+    display: inline-block;
+}
+#image2
+{
+    float: right;
+    height: 100%;
+    width: 20%;
+    display: inline-block;
+}
+#text
+{
+    width: 80%;
+    display: inline-block;
+}
+
+/*====================ABOUT PAGE CSS END=======================*/
+
 
 /*===================SPINNER FOR LOADING EFFECT=====================*/
 

@@ -91,6 +91,21 @@ function initLoginProcess()
         }
     });
 }
+
+function resetPassword()
+{
+    var auth = firebase.auth();
+    var emailAddress = document.getElementById("reset-email").value;
+    
+    auth.sendPasswordResetEmail(emailAddress).then(function() {
+      // Email sent.
+        alert("An Email containing a password reset link has been sent to the provided email address");
+    }).catch(function(error) {
+      // An error happened.
+        alert("Could'nt send email");
+    });
+}
+
 function insertGoogleCredentials()
 {
 	var docData = {

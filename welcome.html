@@ -15,7 +15,7 @@
             <div id="dashboard" class="btn-group">
                 
                 <div id="name-and-photo">
-                    <div id="photo"><img id="profile-pic" src="Koala.jpg" height="50px" width="50px"></div>
+                    <div id="photo"><img id="profile-pic" src="images/Koala.jpg" height="50px" width="50px"></div>
                     <div id="und"></div>
                     <div id="ued"></div>
                 </div>
@@ -27,7 +27,7 @@
                 <button class="button" >Tips</button>
                 <button class="button" onclick = "getQuestions()">Q/A</button>
                 <button class="button" >Company Preparation</button>
-                <button class="button" >About</button>
+                <button class="button" onclick="getAbout()" >About</button>
                 <button class="button" onclick="getSettings()">Settings</button>
                 <button id="logout" class="button" onclick="handleSignOut()" >SignOut</button>
                 
@@ -38,7 +38,7 @@
                 <div id="loader" style="display: none;"></div>
                 <!--div id="editor"></div-->
                 <div id="cards"  style="display:none">  </div>
-                
+            
                 <div id="settings" style="display:none">
                     <table>
                         <tr>
@@ -93,7 +93,7 @@
                  <div id="cardcontent" style="display:none" >
                      
                         <div id="exp-close" onclick="gotoCards()">
-                            <img id="exp-close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                            <img id="exp-close-image" src="images/backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
                         </div>
                         <div id="main-content">
                             <div id="description" ></div>
@@ -121,7 +121,7 @@
                 
                 <div id="questioncontent" style="display:none">
                     <div id="question-close" onclick="gotoQuestions()">
-                        <img id="question-close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                        <img id="question-close-image" src="images/backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
                     </div>
                     <div id="answer-content">
                         <div id="question"></div>
@@ -161,7 +161,28 @@
                     </table>
                     
                 </div>
-                
+            
+                <div id="about" style="display: none; padding: 10px">
+                    <!--div id="image1">
+                        <img src="images/pp3.png" height="100%" width="100%">
+                    </div-->
+                    <div id="text">
+                        <h1 align="center">PLACEMENT PORTAL</h1>
+                        <p id="about-text">
+                            <i><strong>Placement Portal</strong> for engineering students where students can post and view Interview Experiences and interact with each other regarding any placement related queries.</i>
+                        </p>
+                        <p>
+                            Placement season is one of the most important times in a student&apos;s career. Every student aspires to get into a good company. Therefore we intend to aid the students for their successful preparation for placements. This is our motivation behind designing <strong><i>Placement Portal</i></strong>.
+                        </p>
+                        <p>
+                            <strong><i>Placement Portal</i></strong> consists of interview experiences posted by various candidates on the first-hand experience of their interview. Candidates can register and login in order to post their experiences. Candidates can also view the experiences posted by other candidates. All the details such as company name, role offered, hire status, etc can be known for a given post. Candidates can comment on a post regarding any related queries. Placement preparation tips and articles for effective preparation are also provided.
+                        </p>
+                    </div>
+                    <div id="image2">
+                        <img src="images/pp3.png" height="100%" width="100%">
+                    </div>
+                </div>
+            
             </div>
             
         </div>
