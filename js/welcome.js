@@ -263,7 +263,7 @@ function getAllContent(docId)
     document.getElementById("description").innerHTML = "";
     document.getElementById("comments").innerHTML = "";
     
-    var descriptionpath = path.doc(docId);
+    var descriptionpath = firebase.firestore().collection("ie").doc(docId);
     
     commentpath = descriptionpath.collection("comments");
     
@@ -671,4 +671,31 @@ function deleteAccount()
     document.getElementById("reauth-old-password-setting-row").style.display = "block";
     document.getElementById("reauth-button-row").style.display = "block";
     document.getElementById("reauthenticate").addEventListener('click',reauthenticateDelete);
+}
+
+function getCompanyPosts(companyName)
+{
+     firebase.firestore().collection("ie").where("companyName", "==", companyName).get().then(function(document)
+     {
+        document.forEach(function(doc) 
+        {
+            getAllContent(doc.id);
+        });
+     });
+}
+function getCompanies(){
+    
+    firebase.firestore().collection("company").get().then(function(doc){
+       var companyString = "";
+       doc.forEach(function(document){
+           var companyName = document.data().name;
+            companyString+='<div id="companyName" onclick=getCompanyPosts("'+companyName+'")>'+companyName+'<sup>'+document.data().count+'</sup></div>';
+       });
+        var x = document.getElementById("companies").style.display;
+        displaySupporter(x);
+        document.getElementById("companies").style.display = "block";
+        presentId = "companies";
+        document.getElementById("companies").innerHTML = companyString;
+    });
+    
 }

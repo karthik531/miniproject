@@ -12,6 +12,7 @@
 	<body>
         <div id="master">
             
+            
             <div id="dashboard" class="btn-group">
                 
                 <div id="name-and-photo">
@@ -26,7 +27,7 @@
                 <button class="button" onclick="getYourSubmissions()">Your Submissions</button>
                 <button class="button" >Tips</button>
                 <button class="button" onclick = "getQuestions()">Q/A</button>
-                <button class="button" >Company Preparation</button>
+                <button class="button" onclick = "getCompanies()">Company Preparation</button>
                 <button class="button" >About</button>
                 <button class="button" onclick="getSettings()">Settings</button>
                 <button id="logout" class="button" onclick="handleSignOut()" >SignOut</button>
@@ -153,6 +154,9 @@
                         <textarea class="tinymce" id="texteditor"></textarea>
                         <button class = "button button1" onclick="insertPost()">Submit Experience</button>
                     </table>
+                    
+                </div>
+                <div id="companies" style="display:none">
                     
                 </div>
                 
