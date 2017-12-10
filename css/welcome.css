@@ -148,6 +148,7 @@ button:hover{
     border: 1px black dashed;
     border-radius: 5px;
     background-color: white;
+    word-wrap: break-word;
 }
 #question
 {
