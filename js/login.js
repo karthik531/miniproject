@@ -59,6 +59,7 @@ function manageLogin()
 }
 function initLoginProcess()
 {
+    
 	firebase.auth().onAuthStateChanged(function(user)
     {
         if(user)
@@ -76,12 +77,14 @@ function initLoginProcess()
                         querySnapshot.forEach(function(doc) 
                         {
                             var val = doc.data().verified;
-                            if(val){
+                            if(val || user.emailVerified){
+                                document.getElementById("loader").style.display = "none";
                                 window.location.href = "welcome.html"
                             }
                             else{
-                                window.location.html = "index.html"
-                                alert("verify your mail");
+                                alert("Please verify your mail and then login");
+                                window.location.html = "index.html";
+                                
                             }
                         });
         
@@ -91,6 +94,21 @@ function initLoginProcess()
         }
     });
 }
+
+function resetPassword()
+{
+    var auth = firebase.auth();
+    var emailAddress = document.getElementById("reset-email").value;
+    
+    auth.sendPasswordResetEmail(emailAddress).then(function() {
+      // Email sent.
+        alert("An Email containing a password reset link has been sent to the provided email address");
+    }).catch(function(error) {
+      // An error happened.
+        alert("Could'nt send email");
+    });
+}
+
 function insertGoogleCredentials()
 {
 	var docData = {

@@ -18,6 +18,12 @@
 {
     border-radius: 30px;
 }
+#company-pic
+{
+    height: 100%;
+    width: 15%;
+    float: right;
+}
 #master
 {
     width: 100%;
@@ -45,7 +51,7 @@
 }
 
 /*===============CARDS DISPLAY CSS====================*/
-#cards, #yourcards
+#cards, #yourcards, #companylist
 {
     margin: 20px 10px;
     font-family: Calibri, sans-serif;
@@ -53,7 +59,7 @@
     font-style: normal;
     font-size: 18px;
 }
-#ind-card
+#ind-card,#company-card,#tip-card
 {
     background-color: white;
     width: 90%;
@@ -64,7 +70,19 @@
     border-radius: 5px;
     cursor: pointer;
 }
-#ind-card:hover
+#tip-card{
+    height: 8%;
+    padding: 10px;
+    margin: 2%;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+/*#tipcontent
+{
+    font-family: sans-serif;
+    font-size: 16px;
+}*/
+#ind-card:hover,#company-card:hover,#tip-card:hover
 {
     box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -78,6 +96,20 @@
 #user-name
 {
     margin: 10px;
+    float: right;
+}
+#views-and-hired
+{
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#ieviews
+{
+    float: left;
+}
+#isHired
+{
     float: right;
 }
 #views
@@ -120,7 +152,7 @@ button:hover{
 }*/
 
 /*===================DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
-#exp-close, #question-close
+#exp-close, #question-close, #company-close
 {
     margin: 0px;
     position: fixed;
@@ -128,7 +160,7 @@ button:hover{
     background-color: #f7f7f7;
     top: 0;
 }
-#exp-close-image, #question-close-image
+#exp-close-image, #question-close-image, #company-close-image
 {
     height: 40px;
     width: 40px;
@@ -140,7 +172,7 @@ button:hover{
     margin-top: 45px;
     background-color: #f7f7f7;
 }
-#description, #question     /*INTERVIEW EXPERIENCE DESCRIPTION, DISPLAY RESPECTIVE QUESTION IN ANSWERS SECTION*/
+#description, #question, #companyDescription, #tipcontent    /*INTERVIEW EXPERIENCE DESCRIPTION, DISPLAY RESPECTIVE QUESTION IN ANSWERS SECTION*/
 {
     margin: 15px;
     margin-bottom: 20px;
@@ -148,6 +180,7 @@ button:hover{
     border: 1px black dashed;
     border-radius: 5px;
     background-color: white;
+    word-wrap: break-word;
 }
 #question
 {
@@ -173,7 +206,7 @@ button:hover{
 {
     cursor: pointer;
 }
-#cusername, #qusername, #ausername  /*comment username, question username, answer username*/
+#cusername, #qusername, #ausername, #tusername  /*comment username, question username, answer username*/
 {
     background-color: darkcyan;
     border-radius: 10px;
@@ -201,7 +234,7 @@ button:hover{
     border-radius: 10px;
     background-color: lightblue;
 }
-#comment-box, #questionbox, #answer-box     /*RESPECTIVE TEXTAREA*/
+#comment-box, #questionbox, #answer-box ,#tip-comment-box    /*RESPECTIVE TEXTAREA*/
 {
     font-family: sans-serif;
     font-size: 18px;
@@ -227,7 +260,7 @@ button:hover{
     margin-left: 10px;
     margin-top: 20px;
 }
-.cmnt-button, .q-button, .a-button, .edit-button{             /*RESPECTIVE "POST" BUTTONS AFTER ANIMATIONS+edit button*/
+.cmnt-button, .q-button, .a-button, .edit-button, .set-b{             /*RESPECTIVE "POST" BUTTONS AFTER ANIMATIONS+edit button*/
     background-color: cadetblue; 
     border: none;
     border-radius: 8px;
@@ -240,13 +273,13 @@ button:hover{
     display: inline-block;
     font-size: 20px;
 }
-.cmnt-button1, .q-button1, .a-button1, .edit-button1 {         /*RESPECTIVE "POST" BUTTONS BEFORE ANIMATION+edit button*/
+.cmnt-button1, .q-button1, .a-button1, .edit-button1, .set-b1 {         /*RESPECTIVE "POST" BUTTONS BEFORE ANIMATION+edit button*/
     background-color: white; 
     color: black; 
     border: 2px solid cadetblue;
 }
 
-.cmnt-button1:hover, .q-button1:hover, .a-button1:hover, .edit-button1:hover {   /*RESPECTIVE "POST" BUTTON ANIMATION
+.cmnt-button1:hover, .q-button1:hover, .a-button1:hover, .edit-button1:hover, .set-b1:hover {   /*RESPECTIVE "POST" BUTTON ANIMATION
                                                                                         +edit button animation*/
     background-color: cadetblue;                                                   
     color: white;
@@ -275,6 +308,22 @@ button:hover{
 }
 /*===================END OF DESCRIPTION, COMMENTS AND Q/A STYLING======================*/
 
+/*======================SETTINGS========================*/
+
+#settings
+{
+    margin: 15px;
+    padding: 10px;
+    background-color: white;
+    width: 90%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+/*==================SETTINGS COMPLETE===================*/
+
 .btn-group .button {
     background-color: #41495C; 
     border: 1px solid #41495C;
@@ -297,13 +346,54 @@ button:hover{
 .btn-group .button:hover {
     background-color: mediumaquamarine;
 }
-
+.btn-group .button:focus{
+        background-color: darkcyan;
+}
 /*p{
     text-align: center;
     font-family: monospace;
     font-size: 20;
     color: white;
 }*/
+
+
+/*====================ABOUT PAGE CSS=======================*/
+
+#about
+{
+    font-family: cursive;
+    background-color: white;
+    color: black;
+    font-size: 20;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#about-text
+{
+    text-align: left;
+}
+#image1
+{
+    float: left;
+    height: 100%;
+    width: 20%;
+    display: inline-block;
+}
+#image2
+{
+    float: right;
+    height: 100%;
+    width: 20%;
+    display: inline-block;
+}
+#text
+{
+    width: 80%;
+    display: inline-block;
+}
+
+/*====================ABOUT PAGE CSS END=======================*/
+
 
 /*===================SPINNER FOR LOADING EFFECT=====================*/
 

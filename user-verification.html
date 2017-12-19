@@ -1,103 +1,179 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/loginStyle.css">
+</head>
 <body>
     <div id="result" style="display:none">
-        
     <h3><a id="continueURL" href="">CLICK HERE TO REDIRECT TO LOGIN PAGE</a></h3>
     </div>
+    <div id="app-result" style="display:none"></div>
+    <div id="reset" style="display: none">
+        <table class="table" align="center">
+            <tr>
+                <td><input type="password" class="textfield" id="newpass" placeholder="Enter new password here"></td>
+            </tr>
+            <tr>
+                <td><input type="password" class="textfield" id="confirmpass" placeholder="Re-enter new password"></td>
+            </tr>
+            <tr>
+                <td><button id="reset-pass" class="button button1">Update Password</button></td>
+            </tr>
+        </table>
+    </div>
+    
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+    
     <script>
-        function searchAndReplace(oldStr, newStr)
-        {
-            while(continueURL.search(oldStr)!=-1)
-                continueURL = continueURL.replace(oldStr, newStr);
-        }
+        
+    function searchAndReplace(oldStr, newStr)
+    {
+        while(continueURL.search(oldStr)!=-1)
+            continueURL = continueURL.replace(oldStr, newStr);
+    }
+        
     document.addEventListener('DOMContentLoaded', function() 
     {
+        
+      vflag = 0;
       var queryString = window.location.search;
-	  queryString = queryString.substring(1);
-       
+      queryString = queryString.substring(1);
       var parsedQueryString = getQueryString(queryString);
-      // Get the action to complete.
       var mode = parsedQueryString['mode'];
-       
-      // Get the one-time code from the query parameter.
-      var actionCode = parsedQueryString['oobCode'];
-       
-      // (Optional) Get the API key from the query parameter.
-      var apiKey = parsedQueryString['apiKey'];
-      continueURL = parsedQueryString['continueUrl'];
-      searchAndReplace("%3F", "?");
-      searchAndReplace("%3A", ":");
-      searchAndReplace("%2F", "/");
-      searchAndReplace("%3D", "=");
-      searchAndReplace("%40", "@");
-      searchAndReplace("%26", "&");
-               // alert(continueURL);
+      actionCode = parsedQueryString['oobCode'];
+      apiKey = parsedQueryString['apiKey'];
         
-      queryString = continueURL;
-	  queryString = queryString.split('?');
+        if(mode == 'verifyEmail')
+        {
+          continueURL = parsedQueryString['continueUrl'];
+          if(continueURL!=null && continueURL!=" ")
+          {
+              vflag = 1;
+              searchAndReplace("%3F", "?");
+              searchAndReplace("%3A", ":");
+              searchAndReplace("%2F", "/");
+              searchAndReplace("%3D", "=");
+              searchAndReplace("%40", "@");
+              searchAndReplace("%26", "&");
+                       
 
-        continueURL = queryString[1];
-      parsedURL = getQueryString(continueURL);
-      email = parsedURL['email'];
-      uname = parsedURL['username'];
-      uid = parsedURL['uid'];
-        //alert("email="+email+"||uname="+uname+"||uid="+uid);
-      // Configure the Firebase SDK.
-      // This is the minimum configuration required for the API to be used.
+              queryString = continueURL;
+              queryString = queryString.split('?');
 
-      var config = 
+              continueURL = queryString[1];
+              parsedURL = getQueryString(continueURL);
+              email = parsedURL['email'];
+              uname = parsedURL['username'];
+              uid = parsedURL['uid'];
+          }
+        }
+        
+      var config=
       {
-        apiKey: apiKey,
-        authDomain: "vishnu-a7bac.firebaseapp.com",
-	    databaseURL: "https://vishnu-a7bac.firebaseio.com",
-	    projectId: "vishnu-a7bac",
-	    storageBucket: "vishnu-a7bac.appspot.com",
-	    messagingSenderId: "43664081987"
+          apiKey: apiKey,
+          authDomain: "placement-8880e.firebaseapp.com",
+          databaseURL: "https://placement-8880e.firebaseio.com",
+          projectId: "placement-8880e",
+          storageBucket: "placement-8880e.appspot.com",
+          messagingSenderId: "471023664325"
+          
       };
-      var app = firebase.initializeApp(config);
-      var auth = app.auth();
+      app = firebase.initializeApp(config);
+      auth = app.auth();
 
-      // Handle the user management action.
-      switch (mode) {
-        case 'verifyEmail':
-          // Display email verification handler and UI.
-          handleVerifyEmail(auth, actionCode);
-          break;
+      
+      switch (mode) 
+      {
+        case 'verifyEmail': handleVerifyEmail(auth, actionCode);
+                            break;
+        case 'resetPassword': handleResetPassword(auth, actionCode);
+                              break;
         default:
-          // Error: invalid mode.
+          
       }
-    }, false);
         
-    function handleVerifyEmail(auth, actionCode) {
-      // Try to apply the email verification code.
-      auth.applyActionCode(actionCode).then(function(resp) 
-	  {
-        firebase.firestore().collection("users").doc().set({email:email,uid:uid,uname:uname,verified:true}).then(function(){
-              
-              document.getElementById("result").style.display = "block";
-              document.getElementById("continueURL").href = "index.html";
+    }, false);  //DOMLISTENER END;
+    
+        
+    function handleVerifyEmail(auth, actionCode) 
+    {
+      
+          auth.applyActionCode(actionCode).then(function(resp) 
+          {
+            if(vflag==1)
+            {
+                firebase.firestore().collection("users").doc().set({email:email,uid:uid,uname:uname,verified:true}).then(function(){
+
+                      document.getElementById("result").style.display = "block";
+                      document.getElementById("continueURL").href = "index.html";
+            
+              });
+            }
+            else{
+                document.getElementById("app-result").style.display = "block";
+                var msg  = "You have been verified.Please go to app";
+                document.getElementById("app-result").innerHTML = msg;
+            }
+          }).catch(function(error) {
+              alert(error.code+"/"+error.message+"/"+error.name);
           });
-      }).catch(function(error) {
-        // Code is invalid or expired. Ask the user to verify their email address
-        // again.
-          //alert(error.code+"/"+error.message+"/"+error.name);
-      });
+      
     }
 
+    function handleResetPassword(auth, actionCode)
+    {
+        var accountEmail;
+        var flag = 0;
+        auth.verifyPasswordResetCode(actionCode).then(function(email) {
+        var accountEmail = email;
+        document.getElementById("reset").style.display="block";
+        document.getElementById("reset-pass").addEventListener('click', updatePassword);
+          
+      }).catch(function(error) {
+            alert(error.code+"/"+error.message+"/"+error.name);
+      });
+    }
+        
+    function updatePassword()
+    {
+        var newpass = document.getElementById("newpass").value.trim();
+          var confirmpass = document.getElementById("confirmpass").value.trim();
+          flag = 0;
+          if(newpass != confirmpass)
+          {
+              alert("Please enter same password in both the fields");
+              flag = 1;
+          }
+
+          if(flag == 0)
+              {
+                auth.confirmPasswordReset(actionCode, newpass).then(function(resp) 
+                {
+                    alert("Password updated successfully");
+                    document.getElementById("result").style.display = "block";
+                    document.getElementById("reset").style.display = "none";
+                    document.getElementById("continueURL").href = "index.html";
+
+                }).catch(function(error) {
+                    alert(error.code+"/"+error.message+"/"+error.name);
+                });
+              }
+    }
+        
 	function getQueryString( queryString ) 
 	{
 		
             var params = {}, queries, temp, i, l;
-            // Split into key/value pairs
             queries = queryString.split("&");
-            // Convert the array of strings into an object
-            for ( i = 0, l = queries.length; i < l; i++ ) {
+            for ( i = 0, l = queries.length; i < l; i++ ) 
+            {
                 temp = queries[i].split('=');
                 params[temp[0]] = temp[1];
-                //alert(temp[0]+"||"+temp[1]);
+    
             }
             return params;
     }
+        
     </script>
 </body>
+</html>

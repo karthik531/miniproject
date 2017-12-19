@@ -3,14 +3,6 @@ function manageSignup()
     document.getElementById("loader").style.display = "block";
     document.getElementById("form").style.display = "none";
     var flag = 0;
-//REF_URL = https://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
-//var orig_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})");
-//var our_patt = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"); 
-	
-/* 
-	           **** DESCRIPTION ABOUT OUR_PAT REGEX ******* 
-6 to 15 characters string with at least one digit, one upper case letter, one lower case letter and optional special symbol
-*/
     var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();
     var password = document.getElementById("PASSWORD").value.trim();
@@ -47,9 +39,9 @@ function manageSignup()
         var promise = firebase.auth().createUserWithEmailAndPassword(email,password); 
             promise.catch(function(error)
             {
-                document.getElementById("loader").style.display = "none";
-                document.getElementById("form").style.display = "block";
-                console.error("ERROR CREATING USER");
+               
+                alert("ERROR CREATING USER");
+                clearLoaderAndInfo();
             });
             firebase.auth().onAuthStateChanged(function(user)
             {
@@ -59,19 +51,30 @@ function manageSignup()
                     //insertInfoAndProceed();
 
                     var actionCodeSettings = {
-                        url: 'https://localhost/miniproject/user-verification.html?email='+email+'&username='+name+'&uid='+user.uid
+                        url: 'https://pokeavathar.000webhostapp.com/public/user-verification.html?email='+email+'&username='+name+'&uid='+user.uid
                     }
 
                     firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
                       .then(function() {
                         alert("Verification email sent!! Please verify email and login");
+                        clearLoaderAndInfo();
                       })
                       .catch(function(error) {
                         alert("Error occurred!! verification cant be sent to you");
+                        clearLoaderAndInfo();
                       });
                 }
             });
     }
+}
+function clearLoaderAndInfo()
+{
+	 document.getElementById("loader").style.display = "none";
+     document.getElementById("form").style.display = "block";
+	 document.getElementById("EMAIL").value = "";
+	 document.getElementById("PASSWORD").value = "";
+	 document.getElementById("CPASSWORD").value = "";
+	 document.getElementById("NAME").value = "";
 }
 function insertInfoAndProceed()
 {

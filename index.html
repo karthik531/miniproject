@@ -7,6 +7,7 @@
     </head>
     <body>
         <div id="loader" style="display: none;"></div>
+        <div id="ind-card"><div id="login-placement-header">PLACEMENT PORTAL</div></div>
         <div class="form" id="form">
             <table align="center" class="table">
                 <tr>
@@ -34,13 +35,16 @@
                     <td align="left"><button class="gbutton gbutton1" id="GSIGNIN" onclick="manageGoogleSignin()" >Sign In with Google</button></td>
                     <td align="right"><a href="register.html">New User? Register Here</a></td>
                 </tr>
+                <tr>
+                    <td colspan="2" align="center"><a href="reset-password.html">Forgot Password? Click here</a></td>
+                </tr>
                 <tr><td colspan="2"><div id="ERROR"></div></td></tr>
             </table>
         </div>
         
         <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
-		<script src = "js/appconfig.js">
+		<script src = "js/mappconfig.js">
 		  // Initialize Firebase
 		</script>
 	</body>

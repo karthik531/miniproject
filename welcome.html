@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>C language tutorial</title>
+		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/welcome.css">
         <link rel="stylesheet" type="text/css" href="css/editor.css">
 		<script type="text/javascript" src="js/welcome.js"></script>
@@ -11,12 +11,11 @@
 	</head>
 	<body>
         <div id="master">
-            
-            
+           
             <div id="dashboard" class="btn-group">
                 
                 <div id="name-and-photo">
-                    <div id="photo"><img id="profile-pic" src="Koala.jpg" height="50px" width="50px"></div>
+                    <div id="photo"><img id="profile-pic" src="images/Koala.jpg" height="50px" width="50px"></div>
                     <div id="und"></div>
                     <div id="ued"></div>
                 </div>
@@ -25,10 +24,10 @@
                 <button class="button" onclick="getInterviewExperiences()">Interview Experience</button>
                 <button class="button" onclick="insertEditor()">Add Experience</button>
                 <button class="button" onclick="getYourSubmissions()">Your Submissions</button>
-                <button class="button" >Tips</button>
+                <button class="button" onclick="getTips()">Tips</button>
                 <button class="button" onclick = "getQuestions()">Q/A</button>
-                <button class="button" onclick = "getCompanies()">Company Preparation</button>
-                <button class="button" >About</button>
+                <button class="button" onclick="getCompanies()">Companies</button>
+                <button class="button" onclick="getAbout()" >About</button>
                 <button class="button" onclick="getSettings()">Settings</button>
                 <button id="logout" class="button" onclick="handleSignOut()" >SignOut</button>
                 
@@ -39,43 +38,49 @@
                 <div id="loader" style="display: none;"></div>
                 <!--div id="editor"></div-->
                 <div id="cards"  style="display:none">  </div>
-                
+            
                 <div id="settings" style="display:none">
                     <table>
                         <tr>
                             <td id="email-setting">Email</td>
-                            <td><input type="text" id="email-setting-field" disabled></td>
+                            <td><input type="text" class="textfield" id="email-setting-field" disabled></td>
                         </tr>
                         <tr>
                             <td id="uname-setting">Name</td>
-                            <td><input type="text" id="uname-setting-field" onblur="" disabled></td>
-                            <td><button id="uname-setting-toggle" onclick="editUname()">Edit</button></td>
+                            <td><input type="text" class="textfield" id="uname-setting-field" onblur="" disabled></td>
+                            <td><button id="uname-setting-toggle" class="set-b set-b1" onclick="editUname()">Edit</button></td>
                         </tr>
                         
                         <tr>
-                            <td><button id="password-setting-toggle" onclick="changePasswordToggle()">Change Password</button></td>
-                            <td><button id="delete-account" onclick="deleteAccount()">Delete Account</button></td>
-                        </tr>
-                        
-                        <tr id="reauth-email-setting-row" style="display:none">
-                            <td id="reauth-email-setting">Email</td>
-                            <td><input type="text" id="reauth-email-setting-field" ></td>
-                        </tr>
-                        <tr id="reauth-old-password-setting-row" style="display:none">
-                            <td id="reauth-old-password">Old Password</td>
-                            <td><input type="password" id="reauth-old-password-field" ></td>
-                        </tr>
-                        <tr id="reauth-button-row" style="display:none">
-                            <td colspan="2"><button id="reauthenticate" >Reauthenticate</button></td>
-                        </tr>
-                        <tr id="reauth-new-password-setting-row"style="display:none">
-                            <td id="reauth-new-password">New Password</td>
-                            <td><input type="password" id="reauth-new-password-field"></td>
-                        </tr>
-                        <tr id="password-change-button-row" style="display:none">
-                            <td><button id="password-change" onclick="changePassword()">Update Password</button></td>
+                            <td colspan="2"><button id="password-setting-toggle" class="set-b set-b1" onclick="changePasswordToggle()">Change Password</button>
+                            <button id="delete-account" class="del-button del-button1" onclick="deleteAccount()">Delete Account</button></td>
                         </tr>
                     </table>
+                    <br>
+                    <table id="reauth-setting-block" style="display: none">
+                        <tr id="reauth-email-setting-row">
+                            <td id="reauth-email-setting">Email</td>
+                            <td><input type="text" class="textfield" id="reauth-email-setting-field" ></td>
+                        </tr>
+                        <tr id="reauth-old-password-setting-row">
+                            <td id="reauth-old-password">Old Password</td>
+                            <td><input type="password" class="textfield" id="reauth-old-password-field" ></td>
+                        </tr>
+                        <tr id="reauth-button-row">
+                            <td colspan="2"><button id="reauthenticate" class="set-b set-b1">Reauthenticate</button></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="new-password-block" style="display: none">
+                        <tr id="reauth-new-password-setting-row">
+                            <td id="reauth-new-password">New Password</td>
+                            <td><input type="password" class="textfield" id="reauth-new-password-field"></td>
+                        </tr>
+                        <tr id="password-change-button-row">
+                            <td colspan="2"><button id="password-change" class="set-b set-b1" onclick="changePassword()">Update Password</button></td>
+                        </tr>
+                    </table>
+                    <br>
                 </div>
             
                 <div id="your-submissions" style="display:none">
@@ -88,7 +93,7 @@
                  <div id="cardcontent" style="display:none" >
                      
                         <div id="exp-close" onclick="gotoCards()">
-                            <img id="exp-close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                            <img id="exp-close-image" src="images/backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
                         </div>
                         <div id="main-content">
                             <div id="description" ></div>
@@ -115,8 +120,8 @@
                 </div>
                 
                 <div id="questioncontent" style="display:none">
-                    <div id="question-close" onclick="gotoQuestions()">
-                        <img id="question-close-image" src="backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                    <div id="question-close" >
+                        <img id="question-close-image" src="images/backbutton-init.png" onclick="gotoQuestions()" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
                     </div>
                     <div id="answer-content">
                         <div id="question"></div>
@@ -156,15 +161,58 @@
                     </table>
                     
                 </div>
-                <div id="companies" style="display:none">
-                    
+              
+                <div id="about" style="display: none; padding: 10px">
+                    <!--div id="image1">
+                        <img src="images/pp3.png" height="100%" width="100%">
+                    </div-->
+                    <div id="text">
+                        <h1 align="center">PLACEMENT PORTAL</h1>
+                        <p id="about-text">
+                            <i><strong>Placement Portal</strong> for engineering students where students can post and view Interview Experiences and interact with each other regarding any placement related queries.</i>
+                        </p>
+                        <p>
+                            Placement season is one of the most important times in a student&apos;s career. Every student aspires to get into a good company. Therefore we intend to aid the students for their successful preparation for placements. This is our motivation behind designing <strong><i>Placement Portal</i></strong>.
+                        </p>
+                        <p>
+                            <strong><i>Placement Portal</i></strong> consists of interview experiences posted by various candidates on the first-hand experience of their interview. Candidates can register and login in order to post their experiences. Candidates can also view the experiences posted by other candidates. All the details such as company name, role offered, hire status, etc can be known for a given post. Candidates can comment on a post regarding any related queries. Placement preparation tips and articles for effective preparation are also provided.
+                        </p>
+                    </div>
+                    <div id="image2">
+                        <img src="images/pp3.png" height="100%" width="100%">
+                    </div>
                 </div>
-                
+            
+                <div id="companylist" style="display:none"></div>
+            
+                 <div id="company-content" style="display:none">
+                     <div id="company-close">
+                            <img id="company-close-image" src="images/backbutton-init.png" onclick="gotoCompanies()" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                     </div>
+                     <div id="main-content">
+                         <div id="companyDescription"></div>
+                     </div>
+                </div>
+            
+                <div id="tiplist" style="display:none"></div>
+            
+                 <div id="tipDescription" style="display:none" >
+                    <div id="tipcontent" ></div>
+                    <label ID="comment-heading">COMMENTS</label><br>
+                    <table class="text-entry">
+                        <tr>
+                            <td><textarea id="tip-comment-box" placeholder="Leave your comment here" rows="3" cols="100"></textarea></td>
+                            <td><button class="cmnt-button cmnt-button1" onclick="insertTipComment()">Post</button></td>
+                        </tr>
+                    </table>
+                    <div id="tipcomments"></div>
+                 </div>
+            
             </div>
             
         </div>
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
-		<script src = "js/appconfig.js"></script> 
+		<script src = "js/mappconfig.js"></script> 
 	</body>
 </html>
