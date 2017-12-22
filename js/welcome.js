@@ -694,12 +694,23 @@ function reauthenticate(mode)
         }
         else if(mode=="DELETE_USER")
         {
-            user_ref.delete().then(function(){
-               alert("account successfully deleted");
-               handleSignOut();
-            }).catch(function(error){
-               alert("error message "+error.message);
-            }); 
+           firebase.firestore().collection("users").where("uid","==",user_ref.uid).get().then(function(querySnapshot)
+           {
+                querySnapshot.forEach(function(doc)
+                {
+                    if(doc && doc.exists)
+                    {
+                            firebase.firestore().collection("users").doc(doc.id).delete().then(function(){
+                                user_ref.delete().then(function(){
+                                alert("account successfully deleted");
+                                handleSignOut();
+                                }).catch(function(error){
+                                   alert("error message "+error.message);
+                                });
+                            });                
+                    }    
+                });
+           });
         }
     }).catch(function(error){
         alert("invalid user!! Please check your credentials");
