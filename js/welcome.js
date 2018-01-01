@@ -42,6 +42,7 @@ function getName()
 					var docRef = querySnapshot.docs[0];
 					var user_name = docRef.data().uname;
 					localStorage.setItem(user_ref.email,user_name);
+                                
 					document.getElementById("und").innerHTML = user_name;
 				}
 			});						
@@ -50,6 +51,7 @@ function getName()
 	else
 	{
 		localStorage.setItem(user_ref.email,user_ref.displayName);
+        document.getElementById("profile-pic").src = user_ref.photoURL;
 		document.getElementById("und").innerHTML =user_ref.displayName;
 	}
 	document.getElementById("ued").innerHTML = user_ref.email;
@@ -79,20 +81,7 @@ function insertEditor()
 }  
 
 
-function insertQuestion()
-{
-    var question = document.getElementById("questionbox").value;
-    if(question=="") 
-    {
-        alert("EMPTY QUESTION NOT ACCEPTED");
-        return;
-    }
-    var user_name = document.getElementById("und").innerHTML;
-    //alert(user_ref.uid)
-    var questionData = {question: question,uid: user_ref.uid,username : user_name ,views: 0};
-    var promise = firebase.firestore().collection("questions").doc().set(questionData);
-    document.getElementById("questionbox").value = "";
-}
+
 
 function getQuestions()
 {
@@ -189,47 +178,10 @@ function getAllAnswers()
     });
 }
 
-function insertAnswer()
-{
-    var answer = document.getElementById("answer-box").value;
-    if(answer=="")
-    {
-        alert("empty answer not accepted");
-    }
-    else
-    {
-        var user_name = document.getElementById("und").innerHTML;
-        var now = new Date(); 
-        var user_uid = user_ref.uid;
-var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-        var answerData = {comment: answer,time: utc,uid: user_uid,username: user_name};
-        document.getElementById("answer-box").value = "";
-        var promise = answerpath.doc().set(answerData).then(function(){
-            
-            if(user_uid!=mail_uid){
-                
-                var db  = firebase.firestore().collection("users").where("uid","==",mail_uid);
-                
-                db.get().then(function(querySnapshot) 
-                {
-                    querySnapshot.forEach(function(doc) 
-                    {
-                        var toEmail = doc.data().email;
-                        var rusername = doc.data().uname;                       
-                        var message = answer;
-                        var qstn =  document.getElementById("question").innerHTML;
-                        //alert(user_name);
-                        sendMail(toEmail,answer,rusername,user_name,qstn);
-                    });
-                });
-            }
-            
-        });
-    }//else
-}
 
 function sendMail(toEmail,answer,rusername,susername,qstn)
 {
+    alert(toEmail);
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -239,8 +191,9 @@ function sendMail(toEmail,answer,rusername,susername,qstn)
   
   xhttp.open("POST", "sendmail.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send('tomail=pokeavathar@gmail.com&question='+qstn+'&message='+answer+'&rusername='+rusername+'&susername='+susername);
+  xhttp.send('tomail='+toEmail+'&question='+qstn+'&message='+answer+'&rusername='+rusername+'&susername='+susername);
 }
+
 function getInterviewExperiences()
 {
     
@@ -257,11 +210,13 @@ function getInterviewExperiences()
 
                 docIdString = docIdString+'<div id ="ind-card" onclick=getAllContent("'+doc.id+'")>'+
                 '<div id="company-and-user-name">'+
-                '<span id="company-name">'+'Company Name:'+doc.data().companyName+'</span>'+
-                '<span id="user-name">'+'written by:'+doc.data().username+'</span></div><br>'+
+                '<span id="company-name">'+'Company Name: '+doc.data().companyName+'</span>'+
+                '<span id="user-name">'+'written by: '+doc.data().username+'</span></div><br>'+
                 '<div id="views-and-hired">'+
-                '<span id="ieviews">'+'views:'+doc.data().views+'</span>'+
-                '<span id="isHired">'+'Hired:'+doc.data().isHired+'</span>'+
+                '<span id="ieviews">'+'views: '+doc.data().views+'</span>';
+                var isHired = "No";
+                if(doc.data().isHired) isHired = "Yes" 
+                docIdString+='<span id="isHired">'+'Hired: '+isHired+'</span>'+
                 '</div></div><br>'
             });
             
@@ -306,6 +261,8 @@ function getAllContent(docId)
                       
                     document.getElementById("cardcontent").style.display = "block";
                     presentId = "cardcontent";
+                    document.getElementById("cccn").innerHTML = "Company: "+doc.data().companyName;
+                    document.getElementById("ccun").innerHTML = "Written by  "+doc.data().username;
                     document.getElementById("description").innerHTML = doc.data().description;
                     
                   });
@@ -317,23 +274,7 @@ function getAllContent(docId)
    getAllComments();
 }
 
-function insertComment()
-{
-    var com = document.getElementById("comment-box").value;
-    if(com=="")
-    {
-        alert("empty comment not accepted");
-    }
-    else
-    {
-        var user_name = document.getElementById("und").innerHTML;
-         var now = new Date(); 
-var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-        var commentData = {comment:com,time:utc,username:user_name};
-        var promise = commentpath.doc().set(commentData);
-        document.getElementById("comment-box").value = "";
-    }
-}
+
 
 function getAllComments()
 {
@@ -616,10 +557,17 @@ function retrieveProfile()
    document.getElementById("uname-setting-field").value = document.getElementById("und").innerHTML;
    document.getElementById("email-setting-field").value = document.getElementById("ued").innerHTML;
     document.getElementById("loader").style.display = "none";
+    var val = localStorage.getItem("gl");
+    if(val=="true"){
+        document.getElementById("uname-setting-toggle").style.display = "none";
+         document.getElementById("password-setting-toggle").style.display = "none";
+        document.getElementById("delete-account").style.display = "none";
+        
+    }
 }
 
 function editUname()
-{
+{ 
     var isDisabled  = document.getElementById("uname-setting-field").disabled;
     if(isDisabled){
        
@@ -638,7 +586,7 @@ function editUname()
                 {
                     if(doc && doc.exists)
                     {
-
+                            
                             firebase.firestore().collection("users").doc(doc.id).update({uname:new_name}).then(function()
                             {
                                 localStorage.setItem(user_ref.email,new_name);
@@ -767,6 +715,7 @@ function getCompanyContent(docid)
                       
                 document.getElementById("company-content").style.display = "block";
                 presentId = "company-content";
+                document.getElementById("cn").innerHTML = "Company: "+doc.data().title;
                 document.getElementById("companyDescription").innerHTML = doc.data().description;
             }
         
@@ -784,7 +733,7 @@ function getCompanies()
                 '<span id="companyName">'+'Company Name:'+doc.data().title+'</span>'+
                 '<span id="NoOfEmp">'+'Employees:'+doc.data().NoOfEmp+'</span>'+
                 '<span id="rating">'+'Rating:'+doc.data().rating+'</span>'+
-                '<span id="companyYear">'+'Hired:'+doc.data().year+'</span>'+
+                '<span id="companyYear">'+'Founded:'+doc.data().year+'</span>'+
                 '<img id="company-pic"src='+doc.data().url+'>'+
                 '</div><br>'
        }); 
@@ -837,25 +786,7 @@ function getTipComments(docid)
 
         document.getElementById("tipcomments").innerHTML = commentString;
     });
-}
-
-function insertTipComment()
-{
-    var com = document.getElementById("tip-comment-box").value;
-    if(com=="")
-    {
-        alert("empty comment not accepted");
-    }
-    else
-    {
-        var user_name = document.getElementById("und").innerHTML;
-         var now = new Date(); 
-var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-        var commentData = {comment:com,time:utc,username:user_name};
-        var promise = tippath.doc().set(commentData);
-        document.getElementById("tip-comment-box").value = "";
-    }
-}
+} 
 
 function getTips()
 {
@@ -877,5 +808,90 @@ function getTips()
         presentId =  "tiplist";
         document.getElementById("tiplist").innerHTML = tiplist;
     });
+} 
+
+function insertionUtility(type,message,path)
+{
+    var data_object = null;
+    var user_name = document.getElementById("und").innerHTML;
+    if(message==""){
+        alert("empty "+type+" not accepted");
+        return null;
+    }
+    
+    if(type=="question"){
+        data_object = {question: message,uid: user_ref.uid,username : user_name ,views: 0};
+    }
+    else{
+        var now = new Date(); 
+    var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+        data_object = {comment: message,time:utc,username:user_name};
+    }
+    
+    var promise = path.doc().set(data_object);
+    return promise;
 }
+
+function insertTipComment()
+{
+    var com = document.getElementById("tip-comment-box").value;
+    var promise = insertionUtility("tip-comment",com,tippath);
+    document.getElementById("tip-comment-box").value = "";
+} 
+
+function insertQuestion()
+{
+    var question = document.getElementById("questionbox").value;
+    var path = firebase.firestore().collection("questions");
+    var promise = insertionUtility("question",question,path);
+    document.getElementById("questionbox").value = "";
+    
+}
+
+function insertComment()
+{
+    var com = document.getElementById("comment-box").value;
+    var promise = utilityHelper("ie-comment",com,commentpath);
+    document.getElementById("comment-box").value = "";
+}
+
+function insertAnswer()
+{
+    var answer = document.getElementById("answer-box").value;
+    if(answer=="")
+    {
+        alert("empty answer not accepted");
+    }
+    else
+    {
+        var user_name = document.getElementById("und").innerHTML;
+        var now = new Date(); 
+        var user_uid = user_ref.uid;
+var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+        var answerData = {comment: answer,time: utc,uid: user_uid,username: user_name};
+        document.getElementById("answer-box").value = "";
+        var promise = answerpath.doc().set(answerData).then(function(){
+            
+            if(user_uid!=mail_uid){
+                
+                var db  = firebase.firestore().collection("users").where("uid","==",mail_uid);
+                
+                db.get().then(function(querySnapshot) 
+                {
+                    querySnapshot.forEach(function(doc) 
+                    {
+                        var toEmail = doc.data().email;
+                        var rusername = doc.data().uname;                       
+                        var message = answer;
+                        var qstn =  document.getElementById("question").innerHTML;
+                        //alert(user_name);
+                        sendMail(toEmail,answer,rusername,user_name,qstn);
+                    });
+                });
+            }
+            
+        });
+    }//else
+}
+
 /*** GET TIP END ********/

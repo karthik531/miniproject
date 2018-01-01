@@ -16,6 +16,7 @@ function manageLogin()
     document.getElementById("loader").style.display = "block";
     document.getElementById("form").style.display = "none";
     var flag = 0;
+    var error = "";
     var passexp = new RegExp("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,15})");
     var email = document.getElementById("EMAIL").value.trim();
     var password = document.getElementById("PASSWORD").value.trim();
@@ -25,14 +26,16 @@ function manageLogin()
         document.getElementById("loader").style.display = "none";
         document.getElementById("form").style.display = "block";
         flag = 1;
-        document.getElementById("ERROR").innerHTML = "Invalid email address";
+        //document.getElementById("ERROR").innerHTML = "Invalid email address";
+        error+="Invalid Email address";
     }
     if(!passexp.test(password))
     {
         document.getElementById("loader").style.display = "none";
         document.getElementById("form").style.display = "block";
         flag = 1;
-        document.getElementById("ERROR").innerHTML = "Invalid Password";
+        //document.getElementById("ERROR").innerHTML = "Invalid Password";
+        error+=" Invalid password";
     }
     
     if(flag == 0)
@@ -56,6 +59,9 @@ function manageLogin()
         });
         initLoginProcess();
     }
+    else{
+        document.getElementById("ERROR").innerHTML = error;
+    }
 }
 function initLoginProcess()
 {
@@ -66,8 +72,39 @@ function initLoginProcess()
         {
 				if(user.displayName!=null)
 				{
-					user_ref = user;
-					insertGoogleCredentials();
+					//user_ref = user;
+					//insertGoogleCredentials();
+                    firebase.firestore().collection("users").where("email","==",user.email).
+                    get().then(function(query)
+                    {
+                        if(query.empty)
+                        {
+                             var docData = 
+                             {
+                                email: user.email,
+                                uid: user.uid,
+                                uname: user.displayName,
+                                verified: true
+                             };
+
+                            lflag = !lflag;
+
+                            if(lflag)
+                            {
+                                firebase.firestore().collection("users").doc().set(docData).then(function() 
+                                {
+                                    localStorage.setItem("gl","true");
+                                     window.location.href = "welcome.html";
+
+                                });
+                            }
+                        }
+                        else
+                        {
+                            localStorage.setItem("gl","true");
+                            window.location.href = "welcome.html";
+                        }
+                    });
 				}
 				else
                 {
@@ -79,11 +116,14 @@ function initLoginProcess()
                             var val = doc.data().verified;
                             if(val || user.emailVerified){
                                 document.getElementById("loader").style.display = "none";
+                                localStorage.setItem("gl","false");
                                 window.location.href = "welcome.html"
                             }
-                            else{
+                            else
+                            {
                                 alert("Please verify your mail and then login");
-                                window.location.html = "index.html";
+                                document.getElementById("loader").style.display = "none";
+                                document.getElementById("form").style.display = "block";
                                 
                             }
                         });
@@ -105,34 +145,17 @@ function resetPassword()
         alert("An Email containing a password reset link has been sent to the provided email address");
     }).catch(function(error) {
       // An error happened.
-        alert("Could'nt send email");
+        alert("Could'nt send email containing password reset link");
     });
 }
 
 function insertGoogleCredentials()
 {
-	var docData = {
-		email: user_ref.email,
-        uid: user_ref.uid,
-        uname: name,
-        verified: true
-	};
-	var db  = firebase.firestore().collection("users").where("useremail","==",user_ref.email);
-	db.get().then(function(query)
-	{
-		if(query.empty)
-		{
-			firebase.firestore().collection("users").doc().set(docData).then(function() 
-			{
-			window.location.href = "welcome.html";
-			});
-		}
-		else
-		{
-			window.location.href = "welcome.html";
-		}
-	});
+	
+    
+	
 }
 window.onload = function(){
+    lflag = false;
    initLoginProcess();
 };

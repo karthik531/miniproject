@@ -7,10 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   $susername = $_POST["susername"];
   $message = $_POST["message"];
   //$to      = 'pokeavathar@gmail.com';
-  $subject = $rusername." answered your question " .$question;
+  $subject = $susername." answered your question " .$question;
   
-  $headers = 'From: kurushetra111@gmail.com' . "\r\n" .
-           'Reply-To: kurushetra111@gmail.com' . "\r\n" .
+  $headers = 'From: miniprojectjntu@gmail.com' . "\r\n" .
+           'Reply-To: miniprojectjntu@gmail.com' . "\r\n" .
            'X-Mailer: PHP/' . phpversion();
 
 	if(mail($to, $subject, $message, $headers)) 

@@ -40,7 +40,7 @@ function manageSignup()
             promise.catch(function(error)
             {
                
-                alert("ERROR CREATING USER");
+                alert(error.message);
                 clearLoaderAndInfo();
             });
             firebase.auth().onAuthStateChanged(function(user)
@@ -60,7 +60,7 @@ function manageSignup()
                         clearLoaderAndInfo();
                       })
                       .catch(function(error) {
-                        alert("Error occurred!! verification cant be sent to you");
+                        alert("Error occurred!! verification mail cant be sent to you");
                         clearLoaderAndInfo();
                       });
                 }

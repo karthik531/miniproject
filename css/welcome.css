@@ -24,6 +24,10 @@
     width: 15%;
     float: right;
 }
+#companyName,#NoOfEmp,#rating,#companyYear{
+    margin-left: 30px;
+    color: blueviolet;
+}
 #master
 {
     width: 100%;
@@ -166,6 +170,13 @@ button:hover{
     width: 40px;
     border-radius: 15px;
     cursor: pointer;
+}
+#cccn,#ccun,#cn{
+    color:blueviolet;
+    margin-left: 60px;
+}
+#cn{
+    font-size: 20px;
 }
 #main-content, #answer-content  /*RESPECTIVE CONTENTS*/
 {

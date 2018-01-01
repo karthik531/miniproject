@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title></title>
+		<title>Welcome</title>
 		<link rel="stylesheet" type="text/css" href="css/welcome.css">
         <link rel="stylesheet" type="text/css" href="css/editor.css">
 		<script type="text/javascript" src="js/welcome.js"></script>
@@ -15,7 +15,7 @@
             <div id="dashboard" class="btn-group">
                 
                 <div id="name-and-photo">
-                    <div id="photo"><img id="profile-pic" src="images/Koala.jpg" height="50px" width="50px"></div>
+                    <div id="photo"><img id="profile-pic" src="images/pp.png" height="50px" width="50px"></div>
                     <div id="und"></div>
                     <div id="ued"></div>
                 </div>
@@ -92,8 +92,9 @@
                 
                  <div id="cardcontent" style="display:none" >
                      
-                        <div id="exp-close" onclick="gotoCards()">
-                            <img id="exp-close-image" src="images/backbutton-init.png" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                        <div id="exp-close" >
+                            <img id="exp-close-image" src="images/backbutton-init.png" onclick="gotoCards()" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                            <span id="cccn"></span><span id="ccun"></span>
                         </div>
                         <div id="main-content">
                             <div id="description" ></div>
@@ -188,6 +189,7 @@
                  <div id="company-content" style="display:none">
                      <div id="company-close">
                             <img id="company-close-image" src="images/backbutton-init.png" onclick="gotoCompanies()" onmouseover="changeCloseImage()" onmouseout="revertCloseImage()">
+                             <span id="cn"></span>
                      </div>
                      <div id="main-content">
                          <div id="companyDescription"></div>
