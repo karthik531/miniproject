@@ -51,7 +51,7 @@ function manageSignup()
                     //insertInfoAndProceed();
 
                     var actionCodeSettings = {
-                        url: 'https://pokeavathar.000webhostapp.com/public/user-verification.html?email='+email+'&username='+name+'&uid='+user.uid
+                        url: 'https://placement-8880e.firebaseapp.com/user-verification.html?email='+email+'&username='+name+'&uid='+user.uid
                     }
 
                     firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
