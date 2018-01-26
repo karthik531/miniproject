@@ -78,10 +78,7 @@ function insertEditor()
     displaySupporter(x);
     document.getElementById("editor").style.display = "block";
     presentId = "editor";
-}  
-
-
-
+}
 
 function getQuestions()
 {
